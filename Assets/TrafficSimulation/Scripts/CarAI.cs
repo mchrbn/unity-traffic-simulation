@@ -72,8 +72,7 @@ namespace TrafficSimulation {
             }
         }
 
-        void Update()
-        {
+        void Update(){
             if(trafficSystem == null)
                 return;
 
@@ -127,18 +126,19 @@ namespace TrafficSimulation {
             for(float a=-initRay; a<=initRay; a+=raySpacing){
                 otherCarAI = CastRay(anchor, a, this.transform.forward, raycastLength);
 
+                //If rays collide with a car, adapt the top speed to be the same as the one of the front vehicle
                 if(otherCarAI != null && otherCarAI.carController != null && carController.Topspeed > otherCarAI.carController.Topspeed){
-                    //If the car is in an intersection and the flag for has to go is true, ignore any collision and just make the car
-                    //go forward
-                    if(hasToGo)
+                    //Check if the car is on the same lane or not. If not the same lane, then we do not adapt the vehicle speed to the one in front
+                    //(it just means that the rays are hitting a car on the opposite lane...which shouldn't influence the car's speed)
+                    if(hasToGo && curWp != otherCarAI.curWp)
                         return topSpeed;
                         
-                    topSpeed = otherCarAI.carController.Topspeed;
+                    topSpeed = otherCarAI.carController.Topspeed - 0.1f;
                     break;
                 }
             }
             return topSpeed;
-        }
+        }   
 
         /// 
         void MoveVehicle(float _topSpeed){

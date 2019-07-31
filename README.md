@@ -1,12 +1,10 @@
 # Unity Traffic Simulation
-![intro](img/scene-01.gif)
-![intro-2](img/scene-02.gif)
-
+![intro](img/traffic-sim.gif)
 
 Traffic Simulation is a Unity asset that lets you easily simulate simple traffic into your scene.
 
 
-Developed / Tested with Unity 2018.3.x.
+Developed / Tested with Unity 2018.3.x and plus.
 
 ## How to use
 ### Basic
@@ -60,7 +58,6 @@ Setting up a traffic light requires a little bit more steps:
 ## Assets used
 - [Minimalist Free](https://assetstore.unity.com/packages/vfx/shaders/minimalist-free-lowpoly-flat-gradient-shader-96148)  : Gradient skybox for demo scene
 - [Polarith AI Free](https://assetstore.unity.com/packages/tools/ai/polarith-ai-free-movement-steering-92029) : Using their vehicle physic class as well as their 3D car models for the demo scene
-- [Cartoon Lowpoly City Free](https://www.turbosquid.com/FullPreview/Index.cfm/ID/1294342) : Using the city for example scene 2
 
 ---
 

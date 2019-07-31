@@ -18,6 +18,7 @@ namespace TrafficSimulation{
 
         //For traffic lights only
         public float lightsDuration = 8;
+        public float orangeLightDuration = 2;
         public List<Segment> lightsNbr1;
         public List<Segment> lightsNbr2;
 
@@ -39,7 +40,7 @@ namespace TrafficSimulation{
             else if(curLightRed == 2) curLightRed = 1;            
             
             //Wait few seconds after light transition before making the other car move (= orange light)
-            Invoke("MoveVehiclesQueue", 1f);
+            Invoke("MoveVehiclesQueue", orangeLightDuration);
         }
 
         void OnTriggerEnter(Collider other) {
@@ -66,13 +67,13 @@ namespace TrafficSimulation{
         }
 
         void ExitStop(GameObject vehicle){
-
             if(vehiclesQueue.Count == 0)
                 return;
 
             //Remove from queue move the next vehicle
             vehicle.GetComponent<CarAI>().hasToGo = false;
             vehiclesQueue.RemoveAt(0);
+
             //Get next car in queue and make it move
             if(vehiclesQueue.Count > 0){
                 vehiclesQueue[0].GetComponent<CarAI>().hasToStop = false;
@@ -114,14 +115,15 @@ namespace TrafficSimulation{
 
         void MoveVehiclesQueue(){
             //Move all vehicles in queue
-            List<GameObject> nVehicleQueue = new List<GameObject>();
+            List<GameObject> nVehiclesQueue = new List<GameObject>(vehiclesQueue);
             foreach(GameObject vehicle in vehiclesQueue){
-               //if(!IsRedLightSegment(vehicle.GetComponent<CarAI>().curSeg)){
+                if(!IsRedLightSegment(vehicle.GetComponent<CarAI>().curSeg)){
                     vehicle.GetComponent<CarAI>().hasToStop = false;
-                    nVehicleQueue.Remove(vehicle);
-                //}
+                    vehicle.GetComponent<CarAI>().hasToGo = true;
+                    nVehiclesQueue.Remove(vehicle);
+                }
             }
-            vehiclesQueue = nVehicleQueue;
+            vehiclesQueue = nVehiclesQueue;
         }
     }
 }
