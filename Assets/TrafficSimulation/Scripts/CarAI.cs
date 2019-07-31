@@ -130,7 +130,8 @@ namespace TrafficSimulation {
                 if(otherCarAI != null && otherCarAI.carController != null && carController.Topspeed > otherCarAI.carController.Topspeed){
                     //Check if the car is on the same lane or not. If not the same lane, then we do not adapt the vehicle speed to the one in front
                     //(it just means that the rays are hitting a car on the opposite lane...which shouldn't influence the car's speed)
-                    if(hasToGo && curWp != otherCarAI.curWp)
+
+                    if(hasToGo && !IsOnSameLane(otherCarAI.transform))
                         return topSpeed;
                         
                     topSpeed = otherCarAI.carController.Topspeed - 0.1f;
@@ -173,6 +174,12 @@ namespace TrafficSimulation {
                 return 0;
             int c = Random.Range(0, trafficSystem.segments[curSeg].nextSegments.Count);
             return trafficSystem.segments[curSeg].nextSegments[c].id;
+        }
+
+        bool IsOnSameLane(Transform otherCar){
+            Vector3 diff = this.transform.forward - otherCar.transform.forward;
+            if(Mathf.Abs(diff.x) < 0.3f && Mathf.Abs(diff.z) < 0.3f) return true;
+            else return false;
         }
     }
 }

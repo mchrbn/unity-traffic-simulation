@@ -14,7 +14,7 @@ namespace TrafficSimulation{
         public float segDetectThresh = 0.1f;
         public List<Segment> segments = new List<Segment>();
         public List<Intersection> intersections = new List<Intersection>();
-        public Segment curSegment = null;
+        public Segment curSegment = null;  
 
         [MenuItem("Component/Traffic Simulation/Create Traffic Objects")]
         static void CreateTraffic(){
@@ -56,8 +56,8 @@ namespace TrafficSimulation{
                     //     pNext = new Vector3(pNext.x, pNext.y + 0.5f, pNext.z);
                     // }
 
-                    //Draw sphere, the lowest the speed is, the more red the sphere is. Otherwise blue
-                    Gizmos.color = new Color(0f, 0f, 1f, 0.8f);
+                    //Draw sphere, increase color to show the direction
+                    Gizmos.color = new Color(0f, 0f, 1f, (j + 1) / (float) segment.waypoints.Count);
                     Gizmos.DrawSphere(p, 0.4f);
 
                     //Draw line

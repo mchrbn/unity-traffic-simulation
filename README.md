@@ -26,7 +26,6 @@ Traffic Simulation uses NavMesh so you will have to bake your roads. Also make s
 #### Editing Segments / Intersections
 If you delete existing segments or intersections, you will have to press the *Re-Structure Traffic System* button in order to rebuild the system.
 
-
 #### Stops
 You don't have to setup anything for the stops. Simply select *STOP* as the intersection type. The first vehicle to arrive will be the first one to leave.
 
