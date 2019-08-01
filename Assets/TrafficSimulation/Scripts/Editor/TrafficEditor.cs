@@ -85,6 +85,7 @@ namespace TrafficSimulation{
 
             Waypoint wp = go.AddComponent<Waypoint>();
             wp.id = wps.curSegment.waypoints.Count;
+            wp.segment = wps.curSegment;
 
             wps.curSegment.waypoints.Add(wp);
         }
@@ -128,6 +129,7 @@ namespace TrafficSimulation{
                     foreach(Waypoint waypoint in segment.waypoints){
                         if(waypoint != null){
                             waypoint.id = itWp;
+                            waypoint.segment = segment;
                             waypoint.gameObject.name = "Waypoint-" + itWp;
                             nWaypoints.Add(waypoint);
                             itWp++;

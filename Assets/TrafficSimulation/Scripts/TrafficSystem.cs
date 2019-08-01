@@ -57,8 +57,8 @@ namespace TrafficSimulation{
                     // }
 
                     //Draw sphere, increase color to show the direction
-                    Gizmos.color = new Color(0f, 0f, 1f, (j + 1) / (float) segment.waypoints.Count);
-                    Gizmos.DrawSphere(p, 0.4f);
+                    // Gizmos.color = new Color(0f, 0f, 1f, (j + 1) / (float) segment.waypoints.Count);
+                    // Gizmos.DrawSphere(p, .5f);
 
                     //Draw line
                     Gizmos.color = new Color(1f, 0f, 0f);
