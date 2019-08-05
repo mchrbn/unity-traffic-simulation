@@ -16,6 +16,10 @@ namespace TrafficSimulation{
         public IntersectionType intersectionType;
         public int id;
 
+        //For stop only
+        public List<Segment> prioritySegments;
+        List<GameObject> vehiclesInIntersection;
+
         //For traffic lights only
         public float lightsDuration = 8;
         public float orangeLightDuration = 2;
@@ -30,6 +34,7 @@ namespace TrafficSimulation{
 
         void Start(){
             vehiclesQueue = new List<GameObject>();
+            vehiclesInIntersection = new List<GameObject>();
             if(intersectionType == IntersectionType.TRAFFIC_LIGHT)
                 InvokeRepeating("SwitchLights", lightsDuration, lightsDuration);
         }
@@ -60,22 +65,47 @@ namespace TrafficSimulation{
         void TriggerStop(GameObject vehicle){
             //Check if there are other cars in the queue
             //if that's the case, stop the vehicle
-            if(vehiclesQueue.Count > 0){
-                vehicle.GetComponent<CarAI>().hasToStop = true;
+
+            // if(vehiclesQueue.Count > 0){
+            //     vehicle.GetComponent<CarAI>().hasToStop = true;
+            // }
+            // vehiclesQueue.Add(vehicle);
+
+            CarAI carAI = vehicle.GetComponent<CarAI>();
+            if(!IsOnPrioritySegment(carAI)){
+                if(vehiclesQueue.Count > 0 || vehiclesInIntersection.Count > 0){
+                    carAI.hasToStop = true;
+                    vehiclesQueue.Add(vehicle);
+                }
+                else{
+                    vehiclesInIntersection.Add(vehicle);
+                    carAI.hasToGo = true;
+                }
             }
-            vehiclesQueue.Add(vehicle);
+            else{
+                    vehiclesInIntersection.Add(vehicle);
+            }
         }
 
         void ExitStop(GameObject vehicle){
-            if(vehiclesQueue.Count == 0)
-                return;
+            // if(vehiclesQueue.Count == 0)
+            //     return;
 
-            //Remove from queue move the next vehicle
+            // //Remove from queue move the next vehicle
+            // vehicle.GetComponent<CarAI>().hasToGo = false;
+            // vehiclesQueue.RemoveAt(0);
+
+            // //Get next car in queue and make it move
+            // if(vehiclesQueue.Count > 0){
+            //     vehiclesQueue[0].GetComponent<CarAI>().hasToStop = false;
+            //     vehiclesQueue[0].GetComponent<CarAI>().hasToGo = true;
+            // }
+
             vehicle.GetComponent<CarAI>().hasToGo = false;
-            vehiclesQueue.RemoveAt(0);
+            vehiclesInIntersection.Remove(vehicle);
+            vehiclesQueue.Remove(vehicle);
 
-            //Get next car in queue and make it move
-            if(vehiclesQueue.Count > 0){
+            if(vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0){
                 vehiclesQueue[0].GetComponent<CarAI>().hasToStop = false;
                 vehiclesQueue[0].GetComponent<CarAI>().hasToGo = true;
             }
@@ -124,6 +154,14 @@ namespace TrafficSimulation{
                 }
             }
             vehiclesQueue = nVehiclesQueue;
+        }
+
+        bool IsOnPrioritySegment(CarAI carAI){
+            foreach(Segment nsSeg in prioritySegments){
+                if(carAI.curSeg == nsSeg.id)
+                    return true;
+            }
+            return false;
         }
     }
 }

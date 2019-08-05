@@ -84,7 +84,7 @@ namespace TrafficSimulation {
             MoveVehicle(topSpeed);
         }
 
-        //
+
         void WaypointChecker(){
             GameObject waypoint = trafficSystem.segments[curSeg].waypoints[curWp].gameObject;
             //Position of next waypoint relative to the car
@@ -96,9 +96,6 @@ namespace TrafficSimulation {
             //Go to next waypoint if arrived to current
             if(nextWp.magnitude < waypointThresh){
                 curWp++;
-                //If looping
-                //if (curWp >= trafficSystem.segments[curSeg].waypoints.Count) curWp = 0;
-                //If end then find the next segment
                 if(curWp >= trafficSystem.segments[curSeg].waypoints.Count){
                     curSeg = GetNextSegmentId();
                     curWp = 0;
@@ -124,24 +121,31 @@ namespace TrafficSimulation {
             float initRay = (raysNumber / 2f) * raySpacing;
 
             for(float a=-initRay; a<=initRay; a+=raySpacing){
-                otherCarAI = CastRay(anchor, a, this.transform.forward, raycastLength);
+                float hitDist;
+                CastRay(anchor, a, this.transform.forward, raycastLength, out otherCarAI, out hitDist);
 
                 //If rays collide with a car, adapt the top speed to be the same as the one of the front vehicle
                 if(otherCarAI != null && otherCarAI.carController != null && carController.Topspeed > otherCarAI.carController.Topspeed){
                     //Check if the car is on the same lane or not. If not the same lane, then we do not adapt the vehicle speed to the one in front
                     //(it just means that the rays are hitting a car on the opposite lane...which shouldn't influence the car's speed)
-
                     if(hasToGo && !IsOnSameLane(otherCarAI.transform))
                         return topSpeed;
-                        
-                    topSpeed = otherCarAI.carController.Topspeed - 0.1f;
+
+                    //If the hit distance is too close, "emergency slow down" the car so they don't collide
+                    else if(hitDist < 2f)
+                        return topSpeed = 0f;
+                    
+                    //Otherwise adapt the car speed to the one in front
+                    topSpeed = otherCarAI.carController.Topspeed - 0.05f;
                     break;
                 }
             }
+            
+            //If no collision detected then keep the car top speed
             return topSpeed;
         }   
 
-        /// 
+
         void MoveVehicle(float _topSpeed){
             //Wheel steering value
             float steering = Mathf.Clamp(this.transform.InverseTransformDirection(agent.desiredVelocity).x, -1f, 1f);
@@ -155,18 +159,22 @@ namespace TrafficSimulation {
             carController.Move(steering, 1f, 0f);
         }
 
-        //
-        CarAI CastRay(Vector3 anchor, float angle, Vector3 dir, float length){
+        
+        void CastRay(Vector3 anchor, float angle, Vector3 dir, float length, out CarAI outCarAI, out float outHitDistance){
+
+            outCarAI = null;
+            outHitDistance = -1f;
+
             //Draw raycast
             Debug.DrawRay(anchor, Quaternion.Euler(0, angle, 0) * dir * length, new Color(1, 0, 0, 0.5f));
 
             //Detect hit only on the autonomous vehicle layer
             int layer = 1 << LayerMask.NameToLayer("AutonomousVehicle");
             RaycastHit hit;
-            if(Physics.Raycast(anchor, Quaternion.Euler(0, angle, 0) * dir, out hit, length, layer))
-                return hit.collider.GetComponentInParent<CarAI>();
-
-            return null;
+            if(Physics.Raycast(anchor, Quaternion.Euler(0, angle, 0) * dir, out hit, length, layer)){
+                outCarAI = hit.collider.GetComponentInParent<CarAI>();
+                outHitDistance = hit.distance;
+            }
         }
 
         int GetNextSegmentId(){

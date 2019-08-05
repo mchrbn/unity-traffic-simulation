@@ -7,6 +7,9 @@ Traffic Simulation is a Unity asset that lets you easily simulate simple traffic
 Developed / Tested with Unity 2018.3.x and plus.
 
 ## How to use
+### Note
+If you launch the example scene, you will have to press the *Re-Structure Traffic System* button on the *Traffic System* GameObject to re-generate the traffic system or you might have errors.
+
 ### Basic
 Traffic Simulation uses NavMesh so you will have to bake your roads. Also make sure that your roads/terrain have a collider!
 
@@ -27,10 +30,10 @@ Traffic Simulation uses NavMesh so you will have to bake your roads. Also make s
 If you delete existing segments or intersections, you will have to press the *Re-Structure Traffic System* button in order to rebuild the system.
 
 #### Stops
-You don't have to setup anything for the stops. Simply select *STOP* as the intersection type. The first vehicle to arrive will be the first one to leave.
+1. Select *STOP* as the intersection type.
+2. If you have any, select which lanes have the priority (without stop). This means if you leave it empty every lanes will include a stop and work on a first in first out basis.
 
 #### Traffic Lights
-Setting up a traffic light requires a little bit more steps:
 1. Select *TRAFFIC_LIGHT* as intersection type.
 2. Configure the two light groups by placing the segment on the group they belong to. Usually, two opposite lane share the same light group. In the example below, you would have to place the two segments ending with the blue round in one group and the two segments with the gray round on the other group.
 
@@ -49,12 +52,12 @@ Setting up a traffic light requires a little bit more steps:
 
 ## Todo
 - Add multiple lanes.
-- Possibility to choose from an intersection which lanes has a stop and which doesn't. At the moment each lanes of a "Stop" intersection are set to stop. 
-- Possibility to add a speed limitation on certain segments.
-- Pedestrians
-- ...
+- Add a speed limitation on certain segments.
+- Pedestrians.
+- Improve GUI/Editor so it is easier to create intersections and link segments between each others.
+- Better AI for car (ie: able to take over another car if front car maximum speed is too slow).
 
-## Assets used
+## Assets used / Credits
 - [Minimalist Free](https://assetstore.unity.com/packages/vfx/shaders/minimalist-free-lowpoly-flat-gradient-shader-96148)  : Gradient skybox for demo scene
 - [Polarith AI Free](https://assetstore.unity.com/packages/tools/ai/polarith-ai-free-movement-steering-92029) : Using their vehicle physic class as well as their 3D car models for the demo scene
 

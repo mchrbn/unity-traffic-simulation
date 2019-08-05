@@ -15,19 +15,16 @@ public class RedLightStatus : MonoBehaviour
     Light pointLight;
 
     void Start(){
-        //Get point light
         pointLight = this.transform.GetChild(0).GetComponent<Light>();
-
-        //Check if the status of this light is green or red
-        if(lightGroupId == intersection.curLightRed)
-            pointLight.color = new Color(1, 0, 0);
-        else
-            pointLight.color = new Color(0, 1, 0);
+        SetTrafficLightColor();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
+        SetTrafficLightColor();
+    }
+
+    void SetTrafficLightColor(){
         if(lightGroupId == intersection.curLightRed)
             pointLight.color = new Color(1, 0, 0);
         else

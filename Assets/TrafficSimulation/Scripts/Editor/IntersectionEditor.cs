@@ -20,6 +20,15 @@ namespace TrafficSimulation{
         public override void OnInspectorGUI(){
             intersection.intersectionType = (IntersectionType) EditorGUILayout.EnumPopup("Intersection type", intersection.intersectionType);
 
+            EditorGUI.BeginDisabledGroup(intersection.intersectionType != IntersectionType.STOP);
+
+            EditorGUILayout.LabelField("Stop", EditorStyles.boldLabel);
+            SerializedProperty sPrioritySegments = serializedObject.FindProperty("prioritySegments");
+            EditorGUILayout.PropertyField(sPrioritySegments, new GUIContent("Priority Segments"), true);
+            serializedObject.ApplyModifiedProperties();
+
+            EditorGUI.EndDisabledGroup();
+
             EditorGUI.BeginDisabledGroup(intersection.intersectionType != IntersectionType.TRAFFIC_LIGHT);
 
             EditorGUILayout.LabelField("Traffic Lights", EditorStyles.boldLabel);
