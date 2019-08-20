@@ -157,6 +157,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -313,6 +314,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -391,6 +393,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -469,6 +472,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -555,6 +559,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -941,7 +946,7 @@ MonoBehaviour:
   MaximumSteerAngle: 60
   SteerHelper: 0.5
   TractionControl: 0.5
-  FullTorqueOverAllWheels: 2000
+  FullTorqueOverAllWheels: 10000
   ReverseTorque: 100
   Downforce: 200
   Topspeed: 20
@@ -959,13 +964,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde2d72bdb21e8542bfb0a4516cc158b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypointSystem: {fileID: 0}
+  trafficSystem: {fileID: 0}
   waypointThresh: 2
-  startingSegment: {fileID: 0}
   raycastAnchor: {fileID: 950268279}
   raycastLength: 5
+  raySpacing: 2
+  raysNumber: 6
   minTopSpeed: 10
   maxTopSpeed: 30
+  hasToStop: 0
+  hasToGo: 0
+  curSeg: 0
 --- !u!1 &3312457259515349719
 GameObject:
   m_ObjectHideFlags: 0

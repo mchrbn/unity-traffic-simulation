@@ -1411,7 +1411,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -2380,7 +2380,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -2907,7 +2907,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -3175,7 +3175,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -4784,7 +4784,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -5062,7 +5062,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -5530,7 +5530,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -5898,7 +5898,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -6149,7 +6149,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -6905,7 +6905,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -8709,7 +8709,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -10330,7 +10330,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -10639,7 +10639,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -12289,7 +12289,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -12429,7 +12429,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -13176,7 +13176,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -13555,7 +13555,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -14238,7 +14238,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -14698,7 +14698,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -17934,7 +17934,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -18270,7 +18270,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -18881,7 +18881,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -19960,7 +19960,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -20711,7 +20711,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -21107,7 +21107,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -21443,7 +21443,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -21583,7 +21583,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -22906,7 +22906,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -23318,7 +23318,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -24493,7 +24493,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -24973,7 +24973,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -25190,7 +25190,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -25720,7 +25720,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -26129,7 +26129,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -27616,7 +27616,7 @@ PrefabInstance:
     - target: {fileID: 3312457259515347888, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3312457259521580217, guid: e2ace7e47b1bdf64e8164df9c3047935,
         type: 3}
@@ -27854,7 +27854,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
@@ -29945,7 +29945,7 @@ PrefabInstance:
     - target: {fileID: 1809614700398524459, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2696559846416544661, guid: 5aa21f57b5d12c84794c4a413fa73cce,
         type: 3}
@@ -30079,7 +30079,7 @@ PrefabInstance:
     - target: {fileID: 7118174905381296726, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}
       propertyPath: FullTorqueOverAllWheels
-      value: 8000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5963189199863415441, guid: 7524d07406fe4e844a7b65bbcbe13d8f,
         type: 3}

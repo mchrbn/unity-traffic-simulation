@@ -30,7 +30,6 @@ namespace TrafficSimulation{
         List<GameObject> vehiclesQueue;
         [HideInInspector]
         public int curLightRed = 1;
-        bool block = false;
 
         void Start(){
             vehiclesQueue = new List<GameObject>();

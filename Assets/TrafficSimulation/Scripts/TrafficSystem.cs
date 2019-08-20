@@ -16,21 +16,6 @@ namespace TrafficSimulation{
         public List<Intersection> intersections = new List<Intersection>();
         public Segment curSegment = null;  
 
-        [MenuItem("Component/Traffic Simulation/Create Traffic Objects")]
-        static void CreateTraffic(){
-            GameObject mainGo = new GameObject("Traffic System");
-            mainGo.transform.position = Vector3.zero;
-            mainGo.AddComponent<TrafficSystem>();
-
-            GameObject segmentsGo = new GameObject("Segments");
-            segmentsGo.transform.position = Vector3.zero;
-            segmentsGo.transform.SetParent(mainGo.transform);
-
-            GameObject intersectionsGo = new GameObject("Intersections");
-            intersectionsGo.transform.position = Vector3.zero;
-            intersectionsGo.transform.SetParent(mainGo.transform);
-        }
-
         //Draw guizmos on editor window
         void OnDrawGizmos() {
             

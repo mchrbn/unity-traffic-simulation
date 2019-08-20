@@ -31,6 +31,7 @@ namespace TrafficSimulation{
             return false;
         }
 
+        #if UNITY_EDITOR
         void OnDrawGizmos(){
 
             if(GameObject.FindObjectOfType<TrafficSystem>().hideGuizmos) return;
@@ -40,5 +41,6 @@ namespace TrafficSimulation{
             style.fontSize = 15;
             Handles.Label(this.transform.position, this.name, style);
         }
+        #endif
     }
 }

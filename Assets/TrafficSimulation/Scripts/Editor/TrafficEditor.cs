@@ -14,6 +14,21 @@ namespace TrafficSimulation{
 
         TrafficSystem wps;
 
+        [MenuItem("Component/Traffic Simulation/Create Traffic Objects")]
+        static void CreateTraffic(){
+            GameObject mainGo = new GameObject("Traffic System");
+            mainGo.transform.position = Vector3.zero;
+            mainGo.AddComponent<TrafficSystem>();
+
+            GameObject segmentsGo = new GameObject("Segments");
+            segmentsGo.transform.position = Vector3.zero;
+            segmentsGo.transform.SetParent(mainGo.transform);
+
+            GameObject intersectionsGo = new GameObject("Intersections");
+            intersectionsGo.transform.position = Vector3.zero;
+            intersectionsGo.transform.SetParent(mainGo.transform);
+        }
+
         void OnEnable(){
             wps = target as TrafficSystem;
         }
