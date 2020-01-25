@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
@@ -33,39 +34,30 @@ namespace TrafficSimulation{
             wps = target as TrafficSystem;
         }
 
-        void OnSceneGUI(){
+        private void OnSceneGUI() {
             Event e = Event.current;
-            if(e == null) return;
+            if (e == null) return;
 
-            //Add a new waypoint on mouseclick + shift
-            if(e.type == EventType.MouseDown && e.shift){
+            Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
 
-                if(wps.curSegment == null)
-                    return;
+            if (Physics.Raycast(ray, out RaycastHit hit) && e.type == EventType.MouseDown && e.button == 0) {
+                //Add a new waypoint on mouseclick + shift
+                if (e.shift) {
+                    if (wps.curSegment == null) {
+                        return;
+                    }
 
-                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-                RaycastHit hit;
-
-                if(Physics.Raycast(ray, out hit)){
                     AddWaypoint(hit.point);
                 }
-            }
-            //Create a segment + add a new waypoint on mousclick + ctrl
-            else if(e.type == EventType.MouseDown && e.control){
-                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-                RaycastHit hit;
 
-                if(Physics.Raycast(ray, out hit)){
+                //Create a segment + add a new waypoint on mouseclick + ctrl
+                else if (e.control) {
                     AddSegment(hit.point);
                     AddWaypoint(hit.point);
                 }
-            }
-            //Create an intersection type
-            else if(e.type == EventType.MouseDown && e.alt){
-                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-                RaycastHit hit;
 
-                if(Physics.Raycast(ray, out hit)){
+                //Create an intersection type
+                else if (e.alt) {
                     AddIntersection(hit.point);
                 }
             }
