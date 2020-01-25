@@ -6,8 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace TrafficSimulation{
-    public class Waypoint : MonoBehaviour
-    {
+    public class Waypoint : MonoBehaviour {
         [HideInInspector]
         public int id;
         [HideInInspector]
@@ -17,6 +16,15 @@ namespace TrafficSimulation{
             //Draw sphere, increase color to show the direction
             Gizmos.color = new Color(0f, 0f, 1f, (id + 1) / (float) segment.waypoints.Count);
             Gizmos.DrawSphere(this.transform.position, .5f);
+        }
+
+        public void Refresh(int newId, Segment newSegment) {
+            id = newId;
+            segment = newSegment;
+            name = "Waypoint-" + newId;
+            tag = "Waypoint";
+            gameObject.layer = LayerMask.NameToLayer("UnityEditor");
+            SetCollider();
         }
 
         public void SetCollider() {
