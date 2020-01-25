@@ -64,6 +64,15 @@ namespace TrafficSimulation{
 
             //Set waypoint system as the selected gameobject in hierarchy
             Selection.activeGameObject = wps.gameObject;
+            
+            //Look if the users mouse is over a waypoint
+            List<RaycastHit> hits = Physics.RaycastAll(ray, float.MaxValue, LayerMask.GetMask("UnityEditor")).ToList();
+
+            if (hits.Exists(i => i.collider.CompareTag("Waypoint"))) {
+                Handles.SphereHandleCap(0, hits.First(i => i.collider.CompareTag("Waypoint")).collider.transform.position, Quaternion.identity, 1, EventType.Repaint);
+                HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
+                SceneView.RepaintAll();
+            }
         }
 
         public override void OnInspectorGUI(){
@@ -138,6 +147,9 @@ namespace TrafficSimulation{
                             waypoint.id = itWp;
                             waypoint.segment = segment;
                             waypoint.gameObject.name = "Waypoint-" + itWp;
+                            waypoint.gameObject.tag = "Waypoint";
+                            waypoint.gameObject.layer = 10;
+                            waypoint.SetCollider();
                             nWaypoints.Add(waypoint);
                             itWp++;
                         }

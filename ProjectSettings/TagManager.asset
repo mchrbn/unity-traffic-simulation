@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - AutonomousVehicle
+  - Waypoint
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - 
   - PostProcessing
   - AutonomousVehicle
-  - 
+  - UnityEditor
   - 
   - 
   - 
