@@ -13,8 +13,12 @@ namespace TrafficSimulation{
     [CustomEditor(typeof(TrafficSystem))]
     public class TrafficEditor : Editor {
 
-        TrafficSystem wps;
-
+        private TrafficSystem wps;
+        
+        //References for moving a waypoint
+        private Vector3 lastPoint;
+        private Waypoint lastWaypoint;
+        
         [MenuItem("Component/Traffic Simulation/Create Traffic Objects")]
         static void CreateTraffic(){
             GameObject mainGo = new GameObject("Traffic System");
@@ -64,14 +68,52 @@ namespace TrafficSimulation{
 
             //Set waypoint system as the selected gameobject in hierarchy
             Selection.activeGameObject = wps.gameObject;
-            
+
+            bool moved = false;
+
+            //Handle the selected waypoint
+            if (lastWaypoint != null) {
+                //Uses a endless plain for the ray to hit
+                Plane plane = new Plane(Vector3.up.normalized, lastWaypoint.transform.position);
+                plane.Raycast(ray, out float dst);
+                Vector3 hitPoint = ray.GetPoint(dst);
+
+                //Reset lastPoint if the mouse button is pressed down the first time
+                if (e.type == EventType.MouseDown && e.button == 0) {
+                    lastPoint = hitPoint;
+                }
+
+                //Move the selected waypoint
+                if (e.type == EventType.MouseDrag && e.button == 0) {
+                    Vector3 realDPos = new Vector3(hitPoint.x - lastPoint.x, 0, hitPoint.z - lastPoint.z);
+                    moved = true;
+
+                    lastWaypoint.transform.position += realDPos;
+                    lastPoint = hitPoint;
+                }
+
+                //Draw a Sphere
+                Handles.SphereHandleCap(0, lastWaypoint.transform.position, Quaternion.identity, 1, EventType.Repaint);
+                HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
+                SceneView.RepaintAll();
+            }
+
             //Look if the users mouse is over a waypoint
             List<RaycastHit> hits = Physics.RaycastAll(ray, float.MaxValue, LayerMask.GetMask("UnityEditor")).ToList();
 
-            if (hits.Exists(i => i.collider.CompareTag("Waypoint"))) {
-                Handles.SphereHandleCap(0, hits.First(i => i.collider.CompareTag("Waypoint")).collider.transform.position, Quaternion.identity, 1, EventType.Repaint);
-                HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
-                SceneView.RepaintAll();
+            //Set the current hovering waypoint
+            if (lastWaypoint == null && hits.Exists(i => i.collider.CompareTag("Waypoint"))) {
+                lastWaypoint = hits.First(i => i.collider.CompareTag("Waypoint")).collider.GetComponent<Waypoint>();
+            } 
+            
+            //Only reset if the current waypoint was not used
+            else if (e.type == EventType.MouseMove && !moved) {
+                lastWaypoint = null;
+            }
+
+            //Tell Unity that something changed and the scene has to be saved
+            if (moved && !EditorUtility.IsDirty(target)) {
+                EditorUtility.SetDirty(target);
             }
         }
 
