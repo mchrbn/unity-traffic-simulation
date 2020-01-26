@@ -221,6 +221,11 @@ namespace TrafficSimulation{
                 }
             }
             wps.intersections = nIntersections;
+            
+            //Tell Unity that something changed and the scene has to be saved
+            if (!EditorUtility.IsDirty(target)) {
+                EditorUtility.SetDirty(target);
+            }
 
             Debug.Log("[Traffic Simulation] Successfully rebuilt the traffic system.");
         }
