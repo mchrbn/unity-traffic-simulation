@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
@@ -12,8 +13,12 @@ namespace TrafficSimulation{
     [CustomEditor(typeof(TrafficSystem))]
     public class TrafficEditor : Editor {
 
-        TrafficSystem wps;
-
+        private TrafficSystem wps;
+        
+        //References for moving a waypoint
+        private Vector3 lastPoint;
+        private Waypoint lastWaypoint;
+        
         [MenuItem("Component/Traffic Simulation/Create Traffic Objects")]
         static void CreateTraffic(){
             GameObject mainGo = new GameObject("Traffic System");
@@ -33,45 +38,83 @@ namespace TrafficSimulation{
             wps = target as TrafficSystem;
         }
 
-        void OnSceneGUI(){
+        private void OnSceneGUI() {
             Event e = Event.current;
-            if(e == null) return;
+            if (e == null) return;
 
-            //Add a new waypoint on mouseclick + shift
-            if(e.type == EventType.MouseDown && e.shift){
+            Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
 
-                if(wps.curSegment == null)
-                    return;
+            if (Physics.Raycast(ray, out RaycastHit hit) && e.type == EventType.MouseDown && e.button == 0) {
+                //Add a new waypoint on mouseclick + shift
+                if (e.shift) {
+                    if (wps.curSegment == null) {
+                        return;
+                    }
 
-                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-                RaycastHit hit;
-
-                if(Physics.Raycast(ray, out hit)){
                     AddWaypoint(hit.point);
                 }
-            }
-            //Create a segment + add a new waypoint on mousclick + ctrl
-            else if(e.type == EventType.MouseDown && e.control){
-                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-                RaycastHit hit;
 
-                if(Physics.Raycast(ray, out hit)){
+                //Create a segment + add a new waypoint on mouseclick + ctrl
+                else if (e.control) {
                     AddSegment(hit.point);
                     AddWaypoint(hit.point);
                 }
-            }
-            //Create an intersection type
-            else if(e.type == EventType.MouseDown && e.alt){
-                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-                RaycastHit hit;
 
-                if(Physics.Raycast(ray, out hit)){
+                //Create an intersection type
+                else if (e.alt) {
                     AddIntersection(hit.point);
                 }
             }
 
             //Set waypoint system as the selected gameobject in hierarchy
             Selection.activeGameObject = wps.gameObject;
+
+            bool moved = false;
+
+            //Handle the selected waypoint
+            if (lastWaypoint != null) {
+                //Uses a endless plain for the ray to hit
+                Plane plane = new Plane(Vector3.up.normalized, lastWaypoint.transform.position);
+                plane.Raycast(ray, out float dst);
+                Vector3 hitPoint = ray.GetPoint(dst);
+
+                //Reset lastPoint if the mouse button is pressed down the first time
+                if (e.type == EventType.MouseDown && e.button == 0) {
+                    lastPoint = hitPoint;
+                }
+
+                //Move the selected waypoint
+                if (e.type == EventType.MouseDrag && e.button == 0) {
+                    Vector3 realDPos = new Vector3(hitPoint.x - lastPoint.x, 0, hitPoint.z - lastPoint.z);
+                    moved = true;
+
+                    lastWaypoint.transform.position += realDPos;
+                    lastPoint = hitPoint;
+                }
+
+                //Draw a Sphere
+                Handles.SphereHandleCap(0, lastWaypoint.transform.position, Quaternion.identity, 1, EventType.Repaint);
+                HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
+                SceneView.RepaintAll();
+            }
+
+            //Look if the users mouse is over a waypoint
+            List<RaycastHit> hits = Physics.RaycastAll(ray, float.MaxValue, LayerMask.GetMask("UnityEditor")).ToList();
+
+            //Set the current hovering waypoint
+            if (lastWaypoint == null && hits.Exists(i => i.collider.CompareTag("Waypoint"))) {
+                lastWaypoint = hits.First(i => i.collider.CompareTag("Waypoint")).collider.GetComponent<Waypoint>();
+            } 
+            
+            //Only reset if the current waypoint was not used
+            else if (e.type == EventType.MouseMove && !moved) {
+                lastWaypoint = null;
+            }
+
+            //Tell Unity that something changed and the scene has to be saved
+            if (moved && !EditorUtility.IsDirty(target)) {
+                EditorUtility.SetDirty(target);
+            }
         }
 
         public override void OnInspectorGUI(){
@@ -99,8 +142,7 @@ namespace TrafficSimulation{
             go.transform.SetParent(wps.curSegment.transform);
 
             Waypoint wp = go.AddComponent<Waypoint>();
-            wp.id = wps.curSegment.waypoints.Count;
-            wp.segment = wps.curSegment;
+            wp.Refresh(wps.curSegment.waypoints.Count, wps.curSegment);
 
             wps.curSegment.waypoints.Add(wp);
         }
@@ -142,10 +184,8 @@ namespace TrafficSimulation{
                     
                     int itWp = 0;
                     foreach(Waypoint waypoint in segment.waypoints){
-                        if(waypoint != null){
-                            waypoint.id = itWp;
-                            waypoint.segment = segment;
-                            waypoint.gameObject.name = "Waypoint-" + itWp;
+                        if(waypoint != null) {
+                            waypoint.Refresh(itWp, segment);
                             nWaypoints.Add(waypoint);
                             itWp++;
                         }
@@ -181,6 +221,11 @@ namespace TrafficSimulation{
                 }
             }
             wps.intersections = nIntersections;
+            
+            //Tell Unity that something changed and the scene has to be saved
+            if (!EditorUtility.IsDirty(target)) {
+                EditorUtility.SetDirty(target);
+            }
 
             Debug.Log("[Traffic Simulation] Successfully rebuilt the traffic system.");
         }

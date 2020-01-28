@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -54,8 +55,8 @@ namespace TrafficSimulation{
                 //Draw line linking segments
                 foreach(Segment nextSegment in segment.nextSegments){
                     if(nextSegment != null){
-                        Vector3 p1 = segment.waypoints[segment.waypoints.Count-1].transform.position;
-                        Vector3 p2 = nextSegment.transform.position;
+                        Vector3 p1 = segment.waypoints.Last().transform.position;
+                        Vector3 p2 = nextSegment.waypoints.First().transform.position;
 
                         Gizmos.color = new Color(1f, 1f, 0f);
                         Gizmos.DrawLine(p1, p2);
