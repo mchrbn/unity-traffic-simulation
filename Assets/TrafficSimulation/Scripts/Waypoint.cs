@@ -24,13 +24,6 @@ namespace TrafficSimulation{
             name = "Waypoint-" + newId;
             tag = "Waypoint";
             gameObject.layer = LayerMask.NameToLayer("UnityEditor");
-            SetCollider();
-        }
-
-        public void SetCollider() {
-            if (!GetComponent<SphereCollider>()) {
-                gameObject.AddComponent<SphereCollider>();
-            }
         }
     }
 }

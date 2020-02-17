@@ -21,17 +21,21 @@ namespace TrafficSimulation{
         
         [MenuItem("Component/Traffic Simulation/Create Traffic Objects")]
         static void CreateTraffic(){
-            GameObject mainGo = new GameObject("Traffic System");
+            //Create new Undo Group to collect all changes in one Undo
+            Undo.SetCurrentGroupName("Create Traffic Objects");
+            
+            GameObject mainGo = CreateGameObjectWithUndo("Traffic System");
             mainGo.transform.position = Vector3.zero;
-            mainGo.AddComponent<TrafficSystem>();
+            AddComponentWithUndo<TrafficSystem>(mainGo);
 
-            GameObject segmentsGo = new GameObject("Segments");
+            GameObject segmentsGo = CreateGameObjectWithUndo("Segments", mainGo.transform);
             segmentsGo.transform.position = Vector3.zero;
-            segmentsGo.transform.SetParent(mainGo.transform);
 
-            GameObject intersectionsGo = new GameObject("Intersections");
+            GameObject intersectionsGo = CreateGameObjectWithUndo("Intersections", mainGo.transform);
             intersectionsGo.transform.position = Vector3.zero;
-            intersectionsGo.transform.SetParent(mainGo.transform);
+            
+            //Close Undo Operation
+            Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
         }
 
         void OnEnable(){
@@ -51,18 +55,45 @@ namespace TrafficSimulation{
                         return;
                     }
 
+                    //Create new Undo Group to collect all changes in one Undo
+                    Undo.SetCurrentGroupName("Add Waypoint");
+
+                    //Register all TrafficSystem changes after this (string not relevant here)
+                    Undo.RegisterFullObjectHierarchyUndo(wps.gameObject, "Add Waypoint");
+
                     AddWaypoint(hit.point);
+
+                    //Close Undo Operation
+                    Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
                 }
 
                 //Create a segment + add a new waypoint on mouseclick + ctrl
                 else if (e.control) {
+                    //Create new Undo Group to collect all changes in one Undo
+                    Undo.SetCurrentGroupName("Add Segment");
+
+                    //Register all TrafficSystem changes after this (string not relevant here)
+                    Undo.RegisterFullObjectHierarchyUndo(wps.gameObject, "Add Segment");
+
                     AddSegment(hit.point);
                     AddWaypoint(hit.point);
+
+                    //Close Undo Operation
+                    Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
                 }
 
                 //Create an intersection type
                 else if (e.alt) {
+                    //Create new Undo Group to collect all changes in one Undo
+                    Undo.SetCurrentGroupName("Add Intersection");
+
+                    //Register all TrafficSystem changes after this (string not relevant here)
+                    Undo.RegisterFullObjectHierarchyUndo(wps.gameObject, "Add Intersection");
+
                     AddIntersection(hit.point);
+
+                    //Close Undo Operation
+                    Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
                 }
             }
 
@@ -136,38 +167,47 @@ namespace TrafficSimulation{
             serializedObject.ApplyModifiedProperties();
         }
 
-        void AddWaypoint(Vector3 position){
-            GameObject go = new GameObject("Waypoint-" + wps.curSegment.waypoints.Count);
+        private void AddWaypoint(Vector3 position) {
+            GameObject go = CreateGameObjectWithUndo("Waypoint-" + wps.curSegment.waypoints.Count, wps.curSegment.transform);
             go.transform.position = position;
-            go.transform.SetParent(wps.curSegment.transform);
 
-            Waypoint wp = go.AddComponent<Waypoint>();
+            Waypoint wp = AddComponentWithUndo<Waypoint>(go);
+            AddComponentWithUndo<SphereCollider>(go);
+
             wp.Refresh(wps.curSegment.waypoints.Count, wps.curSegment);
 
+            //Record changes to the TrafficSystem (string not relevant here)
+            Undo.RecordObject(wps.curSegment, "");
             wps.curSegment.waypoints.Add(wp);
         }
 
-        void AddSegment(Vector3 position){
+        private void AddSegment(Vector3 position) {
             int segId = wps.segments.Count;
-            GameObject segGo = new GameObject("Segment-" + segId);
+            GameObject segGo = CreateGameObjectWithUndo("Segment-" + segId, wps.transform.GetChild(0).transform);
             segGo.transform.position = position;
-            segGo.transform.SetParent(wps.transform.GetChild(0).transform);
-            wps.curSegment = segGo.AddComponent<Segment>();
+
+            wps.curSegment = AddComponentWithUndo<Segment>(segGo);
             wps.curSegment.id = segId;
             wps.curSegment.waypoints = new List<Waypoint>();
             wps.curSegment.nextSegments = new List<Segment>();
+
+            //Record changes to the TrafficSystem (string not relevant here)
+            Undo.RecordObject(wps, "");
             wps.segments.Add(wps.curSegment);
         }
 
-        void AddIntersection(Vector3 position){
+        private void AddIntersection(Vector3 position) {
             int intId = wps.intersections.Count;
-            GameObject intGo = new GameObject("Intersection-" + intId);
+            GameObject intGo = CreateGameObjectWithUndo("Intersection-" + intId, wps.transform.GetChild(1).transform);
             intGo.transform.position = position;
-            intGo.transform.SetParent(wps.transform.GetChild(1).transform);
-            BoxCollider bc = intGo.AddComponent<BoxCollider>();
+
+            BoxCollider bc = AddComponentWithUndo<BoxCollider>(intGo);
             bc.isTrigger = true;
-            Intersection intersection = intGo.AddComponent<Intersection>();
+            Intersection intersection = AddComponentWithUndo<Intersection>(intGo);
             intersection.id = intId;
+
+            //Record changes to the TrafficSystem (string not relevant here)
+            Undo.RecordObject(wps, "");
             wps.intersections.Add(intersection);
         }
 
@@ -228,6 +268,20 @@ namespace TrafficSimulation{
             }
 
             Debug.Log("[Traffic Simulation] Successfully rebuilt the traffic system.");
+        }
+
+        private static GameObject CreateGameObjectWithUndo(string name, Transform parent = null) {
+            GameObject newGameObject = new GameObject(name);
+
+            //Register changes (string not relevant here)
+            Undo.RegisterCreatedObjectUndo(newGameObject, "Spawn new GameObject");
+            Undo.SetTransformParent(newGameObject.transform, parent, "Set parent");
+
+            return newGameObject;
+        }
+
+        private static T AddComponentWithUndo<T>(GameObject target) where T : Component {
+            return Undo.AddComponent<T>(target);
         }
     }
 }
