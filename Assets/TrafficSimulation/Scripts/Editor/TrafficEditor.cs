@@ -101,8 +101,6 @@ namespace TrafficSimulation{
             //Set waypoint system as the selected gameobject in hierarchy
             Selection.activeGameObject = wps.gameObject;
 
-            bool moved = false;
-
             //Handle the selected waypoint
             if (lastWaypoint != null) {
                 //Uses a endless plain for the ray to hit
@@ -119,7 +117,6 @@ namespace TrafficSimulation{
                 //Move the selected waypoint
                 if (e.type == EventType.MouseDrag && e.button == 0) {
                     Vector3 realDPos = new Vector3(hitPoint.x - lastPoint.x, 0, hitPoint.z - lastPoint.z);
-                    moved = true;
 
                     lastWaypoint.transform.position += realDPos;
                     lastPoint = hitPoint;
@@ -147,14 +144,9 @@ namespace TrafficSimulation{
                 lastWaypoint = hits.First(i => i.collider.CompareTag("Waypoint")).collider.GetComponent<Waypoint>();
             } 
             
-            //Only reset if the current waypoint was not used
-            else if (e.type == EventType.MouseMove && !moved) {
+            //Reset current waypoint
+            else if (lastWaypoint != null && e.type == EventType.MouseMove) {
                 lastWaypoint = null;
-            }
-
-            //Tell Unity that something changed and the scene has to be saved
-            if (moved && !EditorUtility.IsDirty(target)) {
-                EditorUtility.SetDirty(target);
             }
         }
 
