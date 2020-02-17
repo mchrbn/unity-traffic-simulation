@@ -96,7 +96,7 @@ namespace TrafficSimulation{
                 //Reset lastPoint if the mouse button is pressed down the first time
                 if (e.type == EventType.MouseDown && e.button == 0) {
                     lastPoint = hitPoint;
-                    startPosition = hitPoint;
+                    startPosition = lastWaypoint.transform.position;
                 }
 
                 //Move the selected waypoint
