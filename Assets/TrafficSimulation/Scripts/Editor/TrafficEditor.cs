@@ -16,6 +16,7 @@ namespace TrafficSimulation{
         private TrafficSystem wps;
         
         //References for moving a waypoint
+        private Vector3 startPosition;
         private Vector3 lastPoint;
         private Waypoint lastWaypoint;
         
@@ -112,6 +113,7 @@ namespace TrafficSimulation{
                 //Reset lastPoint if the mouse button is pressed down the first time
                 if (e.type == EventType.MouseDown && e.button == 0) {
                     lastPoint = hitPoint;
+                    startPosition = hitPoint;
                 }
 
                 //Move the selected waypoint
@@ -121,6 +123,14 @@ namespace TrafficSimulation{
 
                     lastWaypoint.transform.position += realDPos;
                     lastPoint = hitPoint;
+                }
+
+                //Release the selected waypoint
+                if (e.type == EventType.MouseUp && e.button == 0) {
+                    Vector3 curPos = lastWaypoint.transform.position;
+                    lastWaypoint.transform.position = startPosition;
+                    Undo.RegisterFullObjectHierarchyUndo(lastWaypoint, "Move Waypoint");
+                    lastWaypoint.transform.position = curPos;
                 }
 
                 //Draw a Sphere
