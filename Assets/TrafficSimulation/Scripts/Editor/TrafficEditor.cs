@@ -56,44 +56,29 @@ namespace TrafficSimulation{
                         return;
                     }
 
-                    //Create new Undo Group to collect all changes in one Undo
-                    Undo.SetCurrentGroupName("Add Waypoint");
-
-                    //Register all TrafficSystem changes after this (string not relevant here)
-                    Undo.RegisterFullObjectHierarchyUndo(wps.gameObject, "Add Waypoint");
-
+                    BeginUndoGroup("Add Waypoint");
                     AddWaypoint(hit.point);
 
-                    //Close Undo Operation
+                    //Close Undo Group
                     Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
                 }
 
                 //Create a segment + add a new waypoint on mouseclick + ctrl
                 else if (e.control) {
-                    //Create new Undo Group to collect all changes in one Undo
-                    Undo.SetCurrentGroupName("Add Segment");
-
-                    //Register all TrafficSystem changes after this (string not relevant here)
-                    Undo.RegisterFullObjectHierarchyUndo(wps.gameObject, "Add Segment");
-
+                    BeginUndoGroup("Add Segment");
                     AddSegment(hit.point);
                     AddWaypoint(hit.point);
 
-                    //Close Undo Operation
+                    //Close Undo Group
                     Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
                 }
 
                 //Create an intersection type
                 else if (e.alt) {
-                    //Create new Undo Group to collect all changes in one Undo
-                    Undo.SetCurrentGroupName("Add Intersection");
-
-                    //Register all TrafficSystem changes after this (string not relevant here)
-                    Undo.RegisterFullObjectHierarchyUndo(wps.gameObject, "Add Intersection");
-
+                    BeginUndoGroup("Add Intersection");
                     AddIntersection(hit.point);
 
-                    //Close Undo Operation
+                    //Close Undo Group
                     Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
                 }
             }
@@ -270,6 +255,14 @@ namespace TrafficSimulation{
             }
 
             Debug.Log("[Traffic Simulation] Successfully rebuilt the traffic system.");
+        }
+
+        private void BeginUndoGroup(string undoName) {
+            //Create new Undo Group to collect all changes in one Undo
+            Undo.SetCurrentGroupName(undoName);
+
+            //Register all TrafficSystem changes after this (string not relevant here)
+            Undo.RegisterFullObjectHierarchyUndo(wps.gameObject, undoName);
         }
 
         private static GameObject CreateGameObjectWithUndo(string name, Transform parent = null) {
