@@ -142,6 +142,11 @@ namespace TrafficSimulation{
                     throw new ArgumentOutOfRangeException();
             }
             
+            if (wps.arrowDrawType != ArrowDraw.Off) {
+                wps.arrowSizeWaypoint = EditorGUILayout.FloatField("Arrow Size Waypoint", wps.arrowSizeWaypoint);
+                wps.arrowSizeIntersection = EditorGUILayout.FloatField("Arrow Size Intersection", wps.arrowSizeIntersection);
+            }
+            
             EditorGUI.indentLevel--;
             
             //System Config

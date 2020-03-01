@@ -16,7 +16,9 @@ namespace TrafficSimulation{
         public ArrowDraw arrowDrawType = ArrowDraw.ByLength;
         public int arrowCount = 1;
         public float arrowDistance = 5;
-
+        public float arrowSizeWaypoint = 1;
+        public float arrowSizeIntersection = 0.5f;
+        
         public List<Segment> segments = new List<Segment>();
         public List<Intersection> intersections = new List<Intersection>();
         public Segment curSegment = null;  
@@ -73,7 +75,7 @@ namespace TrafficSimulation{
                                 throw new ArgumentOutOfRangeException();
                         }
                         
-                        Vector3 forward = (p - pNext).normalized;
+                        Vector3 forward = (p - pNext).normalized * arrowSizeWaypoint;
                         Vector3 left = Quaternion.Euler(0, 45, 0) * forward;
                         Vector3 right = Quaternion.Euler(0, -45, 0) * forward;
                         
@@ -95,14 +97,16 @@ namespace TrafficSimulation{
                         Gizmos.color = new Color(1f, 1f, 0f);
                         Gizmos.DrawLine(p1, p2);
 
-                        //Draw arrow
-                        Vector3 center = (p1 + p2) / 2f;
-                        Vector3 forward = (p1 - p2).normalized * 0.5f;
-                        Vector3 left = Quaternion.Euler(0, 45, 0) * forward;
-                        Vector3 right = Quaternion.Euler(0, -45, 0) * forward;
-                        
-                        Gizmos.DrawLine(center, center + left);
-                        Gizmos.DrawLine(center, center + right);
+                        if (arrowDrawType != ArrowDraw.Off) {
+                            //Draw arrow
+                            Vector3 center = (p1 + p2) / 2f;
+                            Vector3 forward = (p1 - p2).normalized * arrowSizeIntersection;
+                            Vector3 left = Quaternion.Euler(0, 45, 0) * forward;
+                            Vector3 right = Quaternion.Euler(0, -45, 0) * forward;
+
+                            Gizmos.DrawLine(center, center + left);
+                            Gizmos.DrawLine(center, center + right);
+                        }
                     }
                 }
             }
