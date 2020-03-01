@@ -13,7 +13,7 @@ namespace TrafficSimulation{
 
         public bool hideGuizmos = false;
         public float segDetectThresh = 0.1f;
-        public ArrowDraw arrowDrawType;
+        public ArrowDraw arrowDrawType = ArrowDraw.ByLength;
         public int arrowCount = 1;
         public float arrowDistance = 5;
 
@@ -94,6 +94,15 @@ namespace TrafficSimulation{
 
                         Gizmos.color = new Color(1f, 1f, 0f);
                         Gizmos.DrawLine(p1, p2);
+
+                        //Draw arrow
+                        Vector3 center = (p1 + p2) / 2f;
+                        Vector3 forward = (p1 - p2).normalized * 0.5f;
+                        Vector3 left = Quaternion.Euler(0, 45, 0) * forward;
+                        Vector3 right = Quaternion.Euler(0, -45, 0) * forward;
+                        
+                        Gizmos.DrawLine(center, center + left);
+                        Gizmos.DrawLine(center, center + right);
                     }
                 }
             }
