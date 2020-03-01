@@ -13,6 +13,10 @@ namespace TrafficSimulation{
 
         public bool hideGuizmos = false;
         public float segDetectThresh = 0.1f;
+        public ArrowDraw arrowDrawType;
+        public int arrowCount = 1;
+        public float arrowDistance = 5;
+
         public List<Segment> segments = new List<Segment>();
         public List<Intersection> intersections = new List<Intersection>();
         public Segment curSegment = null;  
@@ -46,10 +50,40 @@ namespace TrafficSimulation{
                     // Gizmos.color = new Color(0f, 0f, 1f, (j + 1) / (float) segment.waypoints.Count);
                     // Gizmos.DrawSphere(p, .5f);
 
-                    //Draw line
-                    Gizmos.color = new Color(1f, 0f, 0f);
-                    if(pNext != Vector3.zero)
+                    
+                    if(pNext != Vector3.zero) {
+                        //Draw line
+                        Gizmos.color = new Color(1f, 0f, 0f);
                         Gizmos.DrawLine(p, pNext);
+                        
+                        int arrows = 0;
+                        
+                        //Set arrowCount based on arrowDrawType
+                        switch (arrowDrawType) {
+                            case ArrowDraw.FixedCount:
+                                arrows = arrowCount;
+                                break;
+                            case ArrowDraw.ByLength:
+                                //Minimum of one arrow
+                                arrows = Mathf.Max(1, (int) (Vector3.Distance(p, pNext) / arrowDistance));
+                                break;
+                            case ArrowDraw.Off:
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
+                        
+                        Vector3 forward = (p - pNext).normalized;
+                        Vector3 left = Quaternion.Euler(0, 45, 0) * forward;
+                        Vector3 right = Quaternion.Euler(0, -45, 0) * forward;
+                        
+                        //Draw arrows
+                        for (int i = 1; i < arrows + 1; i++) {
+                            Vector3 point = Vector3.Lerp(p, pNext, (float) i / (arrows + 1));
+                            Gizmos.DrawLine(point, point + left);
+                            Gizmos.DrawLine(point, point + right);
+                        }
+                    }
                 }
 
                 //Draw line linking segments
@@ -64,5 +98,9 @@ namespace TrafficSimulation{
                 }
             }
         }
+    }
+
+    public enum ArrowDraw {
+        FixedCount, ByLength, Off
     }
 }

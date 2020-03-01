@@ -1,6 +1,7 @@
 ﻿// Traffic Simulation
 // https://github.com/mchrbn/unity-traffic-simulation
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -118,12 +119,38 @@ namespace TrafficSimulation{
         }
 
         public override void OnInspectorGUI(){
-
+            EditorGUI.BeginChangeCheck();
+            
             //Editor properties
             EditorGUILayout.LabelField("Guizmo Config", EditorStyles.boldLabel);
             wps.hideGuizmos = EditorGUILayout.Toggle("Hide Guizmos", wps.hideGuizmos);
+            
+            //ArrowDrawType selection
+            wps.arrowDrawType = (ArrowDraw) EditorGUILayout.EnumPopup("Arrow Draw Type", wps.arrowDrawType);
+            EditorGUI.indentLevel++;
+
+            switch (wps.arrowDrawType) {
+                case ArrowDraw.FixedCount:
+                    wps.arrowCount = Mathf.Max(1, EditorGUILayout.IntField("Count", wps.arrowCount));
+                    break;
+                case ArrowDraw.ByLength:
+                    wps.arrowDistance = EditorGUILayout.FloatField("Distance Between Arrows", wps.arrowDistance);
+                    break;
+                case ArrowDraw.Off:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            EditorGUI.indentLevel--;
+            
+            //System Config
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField("System Config", EditorStyles.boldLabel);
             wps.segDetectThresh = EditorGUILayout.FloatField("Segment Detection Threshold", wps.segDetectThresh);
+            
+            //Helper
+            EditorGUILayout.Space();
             EditorGUILayout.HelpBox("Ctrl + Left Click to create a new segment\nShift + Left Click to create a new waypoint.\nAlt + Left Click to create a new intersection", MessageType.Info);
             EditorGUILayout.HelpBox("Reminder: The cars will follow the point depending on the sequence you added them. (go to the 1st waypoint added, then to the second, etc.)", MessageType.Info);
 
@@ -131,6 +158,11 @@ namespace TrafficSimulation{
             //Rename waypoints if some have been deleted
             if(GUILayout.Button("Re-Structure Traffic System")){
                 RestructureSystem();
+            }
+
+            //Repaint the scene if values have been edited
+            if (EditorGUI.EndChangeCheck()) {
+                SceneView.RepaintAll();
             }
 
             serializedObject.ApplyModifiedProperties();
