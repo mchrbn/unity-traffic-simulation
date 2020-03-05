@@ -122,13 +122,10 @@ namespace TrafficSimulation{
                 SceneView.RepaintAll();
             }
 
-            //Look if the users mouse is over a waypoint
-            List<RaycastHit> hits = Physics.RaycastAll(ray, float.MaxValue, LayerMask.GetMask("UnityEditor")).ToList();
-
             //Set the current hovering waypoint
-            if (lastWaypoint == null && hits.Exists(i => i.collider.CompareTag("Waypoint"))) {
-                lastWaypoint = hits.First(i => i.collider.CompareTag("Waypoint")).collider.GetComponent<Waypoint>();
-            } 
+            if (lastWaypoint == null) {
+                lastWaypoint = wps.GetAllWaypoints().FirstOrDefault(i => SphereHit(i.transform.position, 0.5f, ray));
+            }
             
             //Reset current waypoint
             else if (lastWaypoint != null && e.type == EventType.MouseMove) {
@@ -196,8 +193,6 @@ namespace TrafficSimulation{
             go.transform.position = position;
 
             Waypoint wp = AddComponentWithUndo<Waypoint>(go);
-            AddComponentWithUndo<SphereCollider>(go);
-
             wp.Refresh(wps.curSegment.waypoints.Count, wps.curSegment);
 
             //Record changes to the TrafficSystem (string not relevant here)
@@ -314,6 +309,23 @@ namespace TrafficSimulation{
 
         private static T AddComponentWithUndo<T>(GameObject target) where T : Component {
             return Undo.AddComponent<T>(target);
+        }
+        
+        //Determines if a ray hits a sphere
+        private static bool SphereHit(Vector3 center, float radius, Ray r) {
+            Vector3 oc = r.origin - center;
+            float a = Vector3.Dot(r.direction, r.direction);
+            float b = 2f * Vector3.Dot(oc, r.direction);
+            float c = Vector3.Dot(oc, oc) - radius * radius;
+            float discriminant = b * b - 4f * a * c;
+
+            if (discriminant < 0f) {
+                return false;
+            }
+
+            float sqrt = Mathf.Sqrt(discriminant);
+
+            return -b - sqrt > 0f || -b + sqrt > 0f;
         }
     }
 }

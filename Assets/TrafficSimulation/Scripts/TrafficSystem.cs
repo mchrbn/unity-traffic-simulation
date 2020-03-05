@@ -111,6 +111,16 @@ namespace TrafficSimulation{
                 }
             }
         }
+        
+        public List<Waypoint> GetAllWaypoints() {
+            List<Waypoint> points = new List<Waypoint>();
+
+            foreach (Segment segment in segments) {
+                points.AddRange(segment.waypoints);
+            }
+
+            return points;
+        }
     }
 
     public enum ArrowDraw {

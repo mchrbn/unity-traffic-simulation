@@ -24,6 +24,15 @@ namespace TrafficSimulation{
             name = "Waypoint-" + newId;
             tag = "Waypoint";
             gameObject.layer = LayerMask.NameToLayer("UnityEditor");
+            
+            //Remove the Collider cause it it not necessary any more
+            RemoveCollider();
+        }
+
+        public void RemoveCollider() {
+            if (GetComponent<SphereCollider>()) {
+                DestroyImmediate(gameObject.GetComponent<SphereCollider>());
+            }
         }
     }
 }
