@@ -17,7 +17,7 @@ namespace TrafficSimulation{
         public List<Waypoint> waypoints;
 
         public bool IsOnSegment(Vector3 p){
-            TrafficSystem ts = GameObject.FindObjectOfType<TrafficSystem>();
+            TrafficSystem ts = GetComponentInParent<TrafficSystem>();
 
             for(int i=0; i < waypoints.Count - 1; i++){
                 float d1 = Vector3.Distance(waypoints[i].transform.position, p);
@@ -34,7 +34,7 @@ namespace TrafficSimulation{
         #if UNITY_EDITOR
         void OnDrawGizmos(){
 
-            if(GameObject.FindObjectOfType<TrafficSystem>().hideGuizmos) return;
+            if(GetComponentInParent<TrafficSystem>().hideGuizmos) return;
 
             GUIStyle style = new GUIStyle();
             style.normal.textColor = new Color(1, 0, 0);

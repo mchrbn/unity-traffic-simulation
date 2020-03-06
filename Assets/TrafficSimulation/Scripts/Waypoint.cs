@@ -15,7 +15,7 @@ namespace TrafficSimulation{
         void OnDrawGizmos(){
             //Draw sphere, increase color to show the direction
             Gizmos.color = new Color(0f, 0f, 1f, (id + 1) / (float) segment.waypoints.Count);
-            Gizmos.DrawSphere(this.transform.position, .5f);
+            Gizmos.DrawSphere(this.transform.position, GetComponentInParent<TrafficSystem>().waypointSize);
         }
 
         public void Refresh(int newId, Segment newSegment) {

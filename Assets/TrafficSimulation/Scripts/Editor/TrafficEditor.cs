@@ -117,14 +117,14 @@ namespace TrafficSimulation{
                 }
 
                 //Draw a Sphere
-                Handles.SphereHandleCap(0, lastWaypoint.transform.position, Quaternion.identity, 1, EventType.Repaint);
+                Handles.SphereHandleCap(0, lastWaypoint.transform.position, Quaternion.identity, wps.waypointSize * 2f, EventType.Repaint);
                 HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
                 SceneView.RepaintAll();
             }
 
             //Set the current hovering waypoint
             if (lastWaypoint == null) {
-                lastWaypoint = wps.GetAllWaypoints().FirstOrDefault(i => SphereHit(i.transform.position, 0.5f, ray));
+                lastWaypoint = wps.GetAllWaypoints().FirstOrDefault(i => SphereHit(i.transform.position, wps.waypointSize, ray));
             }
             
             //Reset current waypoint
@@ -163,6 +163,8 @@ namespace TrafficSimulation{
             }
             
             EditorGUI.indentLevel--;
+
+            wps.waypointSize = EditorGUILayout.FloatField("Waypoint Size", wps.waypointSize);
             
             //System Config
             EditorGUILayout.Space();
