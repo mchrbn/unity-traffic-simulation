@@ -126,6 +126,11 @@ namespace TrafficSimulation{
             if (lastWaypoint == null) {
                 lastWaypoint = wps.GetAllWaypoints().FirstOrDefault(i => SphereHit(i.transform.position, wps.waypointSize, ray));
             }
+
+            //Update the current segment to the currently interacting one
+            if (lastWaypoint != null && e.type == EventType.MouseDown) {
+                wps.curSegment = lastWaypoint.segment;
+            }
             
             //Reset current waypoint
             else if (lastWaypoint != null && e.type == EventType.MouseMove) {

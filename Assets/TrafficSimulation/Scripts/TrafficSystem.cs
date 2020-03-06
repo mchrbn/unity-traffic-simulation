@@ -44,19 +44,15 @@ namespace TrafficSimulation{
                         pNext = segment.waypoints[j+1].transform.position;
                         pNext = new Vector3(pNext.x, pNext.y + 0.5f, pNext.z);
                     }
-                    // else if(j == segments[i].waypoints.Count-1){
-                    //     pNext = segments[i].waypoints[0].transform.position;
-                    //     pNext = new Vector3(pNext.x, pNext.y + 0.5f, pNext.z);
-                    // }
 
-                    //Draw sphere, increase color to show the direction
-                    // Gizmos.color = new Color(0f, 0f, 1f, (j + 1) / (float) segment.waypoints.Count);
-                    // Gizmos.DrawSphere(p, .5f);
-
-                    
                     if(pNext != Vector3.zero) {
+                        if (segment == curSegment) {
+                            Gizmos.color = new Color(1f, .3f, .1f);
+                        } else {
+                            Gizmos.color = new Color(1f, 0f, 0f);
+                        }
+                        
                         //Draw line
-                        Gizmos.color = new Color(1f, 0f, 0f);
                         Gizmos.DrawLine(p, pNext);
                         
                         int arrows = 0;
