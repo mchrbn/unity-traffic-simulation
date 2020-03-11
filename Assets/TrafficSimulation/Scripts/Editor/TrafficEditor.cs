@@ -138,13 +138,17 @@ namespace TrafficSimulation{
             }
         }
 
-        public override void OnInspectorGUI(){
+        public override void OnInspectorGUI() {
             EditorGUI.BeginChangeCheck();
-            
+
+            //Register an Undo if changes are made after this call
+            Undo.RecordObject(wps, "Traffic Inspector Edit");
+
+            //Draw the Inspector
             TrafficEditorInspector.DrawInspector(wps, out bool restructureSystem);
 
             //Rename waypoints if some have been deleted
-            if(restructureSystem){
+            if (restructureSystem) {
                 RestructureSystem();
             }
 
