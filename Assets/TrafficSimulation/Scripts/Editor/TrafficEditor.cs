@@ -141,49 +141,10 @@ namespace TrafficSimulation{
         public override void OnInspectorGUI(){
             EditorGUI.BeginChangeCheck();
             
-            //Editor properties
-            EditorGUILayout.LabelField("Guizmo Config", EditorStyles.boldLabel);
-            wps.hideGuizmos = EditorGUILayout.Toggle("Hide Guizmos", wps.hideGuizmos);
-            
-            //ArrowDrawType selection
-            wps.arrowDrawType = (ArrowDraw) EditorGUILayout.EnumPopup("Arrow Draw Type", wps.arrowDrawType);
-            EditorGUI.indentLevel++;
-
-            switch (wps.arrowDrawType) {
-                case ArrowDraw.FixedCount:
-                    wps.arrowCount = Mathf.Max(1, EditorGUILayout.IntField("Count", wps.arrowCount));
-                    break;
-                case ArrowDraw.ByLength:
-                    wps.arrowDistance = EditorGUILayout.FloatField("Distance Between Arrows", wps.arrowDistance);
-                    break;
-                case ArrowDraw.Off:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            
-            if (wps.arrowDrawType != ArrowDraw.Off) {
-                wps.arrowSizeWaypoint = EditorGUILayout.FloatField("Arrow Size Waypoint", wps.arrowSizeWaypoint);
-                wps.arrowSizeIntersection = EditorGUILayout.FloatField("Arrow Size Intersection", wps.arrowSizeIntersection);
-            }
-            
-            EditorGUI.indentLevel--;
-
-            wps.waypointSize = EditorGUILayout.FloatField("Waypoint Size", wps.waypointSize);
-            
-            //System Config
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("System Config", EditorStyles.boldLabel);
-            wps.segDetectThresh = EditorGUILayout.FloatField("Segment Detection Threshold", wps.segDetectThresh);
-            
-            //Helper
-            EditorGUILayout.Space();
-            EditorGUILayout.HelpBox("Ctrl + Left Click to create a new segment\nShift + Left Click to create a new waypoint.\nAlt + Left Click to create a new intersection", MessageType.Info);
-            EditorGUILayout.HelpBox("Reminder: The cars will follow the point depending on the sequence you added them. (go to the 1st waypoint added, then to the second, etc.)", MessageType.Info);
-
+            TrafficEditorInspector.DrawInspector(wps, out bool restructureSystem);
 
             //Rename waypoints if some have been deleted
-            if(GUILayout.Button("Re-Structure Traffic System")){
+            if(restructureSystem){
                 RestructureSystem();
             }
 
