@@ -235,7 +235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 18658130}
   - component: {fileID: 18658131}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -710,7 +710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 64010786}
   - component: {fileID: 64010785}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-2
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -1158,7 +1158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 132266364}
   - component: {fileID: 132266365}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -2002,7 +2002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 168052833}
   - component: {fileID: 168052832}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-2
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -2212,7 +2212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 187508897}
   - component: {fileID: 187508898}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -2956,7 +2956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 252340021}
   - component: {fileID: 252340022}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -3007,7 +3007,7 @@ GameObject:
   m_Component:
   - component: {fileID: 269290635}
   - component: {fileID: 269290636}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -3433,7 +3433,7 @@ GameObject:
   m_Component:
   - component: {fileID: 316271480}
   - component: {fileID: 316271479}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -3478,7 +3478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 319413471}
   - component: {fileID: 319413470}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-2
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -3614,7 +3614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 322969150}
   - component: {fileID: 322969149}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -3828,7 +3828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 354585252}
   - component: {fileID: 354585251}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-2
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -3873,7 +3873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 354834589}
   - component: {fileID: 354834588}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-2
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -3918,7 +3918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355767701}
   - component: {fileID: 355767702}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -4136,7 +4136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 363581414}
   - component: {fileID: 363581413}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -4437,7 +4437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 380213309}
   - component: {fileID: 380213308}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-2
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -6250,7 +6250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471195183}
   - component: {fileID: 471195182}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -9106,7 +9106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 621840977}
   - component: {fileID: 621840978}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -9837,7 +9837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 700121191}
   - component: {fileID: 700121192}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -9901,7 +9901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 706564030}
   - component: {fileID: 706564029}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -10123,7 +10123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 722440549}
   - component: {fileID: 722440550}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -10688,7 +10688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 762143550}
   - component: {fileID: 762143551}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -11137,7 +11137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 792386794}
   - component: {fileID: 792386793}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -11201,7 +11201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 796741488}
   - component: {fileID: 796741489}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -11265,7 +11265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 814634381}
   - component: {fileID: 814634382}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -11997,7 +11997,7 @@ GameObject:
   m_Component:
   - component: {fileID: 842771137}
   - component: {fileID: 842771136}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -12121,7 +12121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 845554236}
   - component: {fileID: 845554237}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -12538,7 +12538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 895439731}
   - component: {fileID: 895439730}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -12658,7 +12658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 920003783}
   - component: {fileID: 920003784}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -12703,7 +12703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 920729958}
   - component: {fileID: 920729959}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -12767,7 +12767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 929777383}
   - component: {fileID: 929777384}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -12910,7 +12910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 935130376}
   - component: {fileID: 935130377}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -13206,7 +13206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 959109782}
   - component: {fileID: 959109783}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -13251,7 +13251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 959585391}
   - component: {fileID: 959585392}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -13762,7 +13762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 989166578}
   - component: {fileID: 989166577}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-2
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -14004,7 +14004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1010298806}
   - component: {fileID: 1010298805}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -14268,7 +14268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1034599783}
   - component: {fileID: 1034599784}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -15269,7 +15269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1111831830}
   - component: {fileID: 1111831829}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -16053,7 +16053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1166953716}
   - component: {fileID: 1166953717}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -16247,7 +16247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1179627362}
   - component: {fileID: 1179627363}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -16533,7 +16533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1187705422}
   - component: {fileID: 1187705423}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -17311,7 +17311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1275475205}
   - component: {fileID: 1275475204}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -17356,7 +17356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1291159614}
   - component: {fileID: 1291159615}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -17688,7 +17688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1304636942}
   - component: {fileID: 1304636943}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -19289,7 +19289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1405770357}
   - component: {fileID: 1405770358}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -19805,7 +19805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1453734301}
   - component: {fileID: 1453734300}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-2
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -20107,7 +20107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1491189270}
   - component: {fileID: 1491189271}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -20250,7 +20250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1494326745}
   - component: {fileID: 1494326744}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -20465,7 +20465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1512114421}
   - component: {fileID: 1512114422}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -20760,7 +20760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1526589131}
   - component: {fileID: 1526589130}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -20805,7 +20805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1527569216}
   - component: {fileID: 1527569215}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -21613,7 +21613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1587047711}
   - component: {fileID: 1587047712}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -21749,7 +21749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1604083285}
   - component: {fileID: 1604083284}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -21794,7 +21794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1614332266}
   - component: {fileID: 1614332265}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -22035,7 +22035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1623750872}
   - component: {fileID: 1623750873}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -22398,7 +22398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1654736283}
   - component: {fileID: 1654736284}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -22541,7 +22541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1659906090}
   - component: {fileID: 1659906091}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -23125,7 +23125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1695153033}
   - component: {fileID: 1695153032}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -23536,7 +23536,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1764785784}
   - component: {fileID: 1764785783}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -23640,7 +23640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1774563414}
   - component: {fileID: 1774563415}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -23691,7 +23691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1781705010}
   - component: {fileID: 1781705011}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -24591,7 +24591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1826728823}
   - component: {fileID: 1826728822}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -25022,7 +25022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1865475067}
   - component: {fileID: 1865475066}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -25214,7 +25214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1867570117}
   - component: {fileID: 1867570118}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -25334,7 +25334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1882405231}
   - component: {fileID: 1882405230}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -25848,7 +25848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1919582714}
   - component: {fileID: 1919582715}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -25893,7 +25893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1921169986}
   - component: {fileID: 1921169987}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -26446,7 +26446,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1943247905}
   - component: {fileID: 1943247906}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -27018,7 +27018,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1977612824}
   - component: {fileID: 1977612825}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -27180,7 +27180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1982109094}
   - component: {fileID: 1982109093}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -27454,7 +27454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1998035370}
   - component: {fileID: 1998035371}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -28136,7 +28136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2022687501}
   - component: {fileID: 2022687502}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-0
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -28389,7 +28389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2029036028}
   - component: {fileID: 2029036027}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -28434,7 +28434,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2038907550}
   - component: {fileID: 2038907551}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -29000,7 +29000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2083284749}
   - component: {fileID: 2083284748}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -29424,7 +29424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2091250057}
   - component: {fileID: 2091250058}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}
@@ -29469,7 +29469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2092598082}
   - component: {fileID: 2092598081}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Waypoint-1
   m_TagString: Waypoint
   m_Icon: {fileID: 0}

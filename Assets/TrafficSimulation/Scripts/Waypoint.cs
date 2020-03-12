@@ -23,7 +23,9 @@ namespace TrafficSimulation{
             segment = newSegment;
             name = "Waypoint-" + newId;
             tag = "Waypoint";
-            gameObject.layer = LayerMask.NameToLayer("UnityEditor");
+            
+            //Set the layer to Default
+            gameObject.layer = 0;
             
             //Remove the Collider cause it it not necessary any more
             RemoveCollider();
