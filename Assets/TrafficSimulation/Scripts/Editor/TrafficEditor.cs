@@ -114,7 +114,7 @@ namespace TrafficSimulation {
                 }
 
                 //Draw a Sphere
-                Handles.SphereHandleCap(0, lastWaypoint.transform.position, Quaternion.identity, wps.waypointSize * 2f, EventType.Repaint);
+                Handles.SphereHandleCap(0, lastWaypoint.transform.position + new Vector3(0, 0.5f, 0f), Quaternion.identity, wps.waypointSize * 2f, EventType.Repaint);
                 HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
                 SceneView.RepaintAll();
             }

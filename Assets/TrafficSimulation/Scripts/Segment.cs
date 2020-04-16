@@ -7,8 +7,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Reflection;
 
-namespace TrafficSimulation{
-
+namespace TrafficSimulation {
     public class Segment : MonoBehaviour {
         public List<Segment> nextSegments;
         [HideInInspector]
@@ -30,17 +29,5 @@ namespace TrafficSimulation{
             }
             return false;
         }
-
-        #if UNITY_EDITOR
-        void OnDrawGizmos(){
-
-            if(GetComponentInParent<TrafficSystem>().hideGuizmos) return;
-
-            GUIStyle style = new GUIStyle();
-            style.normal.textColor = new Color(1, 0, 0);
-            style.fontSize = 15;
-            Handles.Label(this.transform.position, this.name, style);
-        }
-        #endif
     }
 }
