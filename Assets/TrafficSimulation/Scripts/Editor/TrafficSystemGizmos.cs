@@ -46,35 +46,16 @@ namespace TrafficSimulation {
                             Gizmos.color = new Color(1f, 0f, 0f);
                         }
 
-                        //Draw line
+                        //Draw connection line of the two waypoints
                         Gizmos.DrawLine(p, pNext);
 
-                        int arrows = 0;
-
-                        //Set arrowCount based on arrowDrawType
-                        switch (script.arrowDrawType) {
-                            case ArrowDraw.FixedCount:
-                                arrows = script.arrowCount;
-                                break;
-                            case ArrowDraw.ByLength:
-                                //Minimum of one arrow
-                                arrows = Mathf.Max(1, (int) (Vector3.Distance(p, pNext) / script.arrowDistance));
-                                break;
-                            case ArrowDraw.Off:
-                                break;
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-
-                        Vector3 forward = (p - pNext).normalized * script.arrowSizeWaypoint;
-                        Vector3 left = Quaternion.Euler(0, 45, 0) * forward;
-                        Vector3 right = Quaternion.Euler(0, -45, 0) * forward;
+                        //Set arrow count based on arrowDrawType
+                        int arrows = GetArrowCount(p, pNext, script);
 
                         //Draw arrows
                         for (int i = 1; i < arrows + 1; i++) {
                             Vector3 point = Vector3.Lerp(p, pNext, (float) i / (arrows + 1));
-                            Gizmos.DrawLine(point, point + left);
-                            Gizmos.DrawLine(point, point + right);
+                            DrawArrow(point, p - pNext, script.arrowSizeWaypoint);
                         }
                     }
                 }
@@ -89,17 +70,33 @@ namespace TrafficSimulation {
                         Gizmos.DrawLine(p1, p2);
 
                         if (script.arrowDrawType != ArrowDraw.Off) {
-                            //Draw arrow
-                            Vector3 center = (p1 + p2) / 2f;
-                            Vector3 forward = (p1 - p2).normalized * script.arrowSizeIntersection;
-                            Vector3 left = Quaternion.Euler(0, 45, 0) * forward;
-                            Vector3 right = Quaternion.Euler(0, -45, 0) * forward;
-
-                            Gizmos.DrawLine(center, center + left);
-                            Gizmos.DrawLine(center, center + right);
+                            DrawArrow((p1 + p2) / 2f, p1 - p2, script.arrowSizeIntersection);
                         }
                     }
                 }
+            }
+        }
+
+        private static void DrawArrow(Vector3 point, Vector3 forward, float size) {
+            forward = forward.normalized * size;
+            Vector3 left = Quaternion.Euler(0, 45, 0) * forward;
+            Vector3 right = Quaternion.Euler(0, -45, 0) * forward;
+
+            Gizmos.DrawLine(point, point + left);
+            Gizmos.DrawLine(point, point + right);
+        }
+
+        private static int GetArrowCount(Vector3 pointA, Vector3 pointB, TrafficSystem script) {
+            switch (script.arrowDrawType) {
+                case ArrowDraw.FixedCount:
+                    return script.arrowCount;
+                case ArrowDraw.ByLength:
+                    //Minimum of one arrow
+                    return Mathf.Max(1, (int) (Vector3.Distance(pointA, pointB) / script.arrowDistance));
+                case ArrowDraw.Off:
+                    return 0;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }
