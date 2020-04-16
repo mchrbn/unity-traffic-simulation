@@ -26,8 +26,7 @@ namespace TrafficSimulation {
                 //Draw waypoint
                 for (int j = 0; j < segment.waypoints.Count; j++) {
                     //Get current waypoint position
-                    Vector3 p = segment.waypoints[j].transform.position;
-                    p = new Vector3(p.x, p.y + 0.5f, p.z);
+                    Vector3 p = segment.waypoints[j].GetVisualPos();
 
                     //Draw sphere, increase color to show the direction
                     Gizmos.color = new Color(0f, 0f, 1f, (j + 1) / (float) segment.waypoints.Count);
@@ -37,8 +36,7 @@ namespace TrafficSimulation {
                     Vector3 pNext = Vector3.zero;
 
                     if (j < segment.waypoints.Count - 1 && segment.waypoints[j + 1] != null) {
-                        pNext = segment.waypoints[j + 1].transform.position;
-                        pNext = new Vector3(pNext.x, pNext.y + 0.5f, pNext.z);
+                        pNext = segment.waypoints[j + 1].GetVisualPos();
                     }
 
                     if (pNext != Vector3.zero) {
@@ -84,8 +82,8 @@ namespace TrafficSimulation {
                 //Draw line linking segments
                 foreach (Segment nextSegment in segment.nextSegments) {
                     if (nextSegment != null) {
-                        Vector3 p1 = segment.waypoints.Last().transform.position;
-                        Vector3 p2 = nextSegment.waypoints.First().transform.position;
+                        Vector3 p1 = segment.waypoints.Last().GetVisualPos();
+                        Vector3 p2 = nextSegment.waypoints.First().GetVisualPos();
 
                         Gizmos.color = new Color(1f, 1f, 0f);
                         Gizmos.DrawLine(p1, p2);

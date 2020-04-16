@@ -87,7 +87,7 @@ namespace TrafficSimulation {
             //Handle the selected waypoint
             if (lastWaypoint != null) {
                 //Uses a endless plain for the ray to hit
-                Plane plane = new Plane(Vector3.up.normalized, lastWaypoint.transform.position);
+                Plane plane = new Plane(Vector3.up.normalized, lastWaypoint.GetVisualPos());
                 plane.Raycast(ray, out float dst);
                 Vector3 hitPoint = ray.GetPoint(dst);
 
@@ -114,14 +114,14 @@ namespace TrafficSimulation {
                 }
 
                 //Draw a Sphere
-                Handles.SphereHandleCap(0, lastWaypoint.transform.position + new Vector3(0, 0.5f, 0f), Quaternion.identity, wps.waypointSize * 2f, EventType.Repaint);
+                Handles.SphereHandleCap(0, lastWaypoint.GetVisualPos(), Quaternion.identity, wps.waypointSize * 2f, EventType.Repaint);
                 HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
                 SceneView.RepaintAll();
             }
 
             //Set the current hovering waypoint
             if (lastWaypoint == null) {
-                lastWaypoint = wps.GetAllWaypoints().FirstOrDefault(i => EditorHelper.SphereHit(i.transform.position, wps.waypointSize, ray));
+                lastWaypoint = wps.GetAllWaypoints().FirstOrDefault(i => EditorHelper.SphereHit(i.GetVisualPos(), wps.waypointSize, ray));
             }
 
             //Update the current segment to the currently interacting one

@@ -30,5 +30,9 @@ namespace TrafficSimulation {
                 DestroyImmediate(gameObject.GetComponent<SphereCollider>());
             }
         }
+
+        public Vector3 GetVisualPos() {
+            return transform.position + new Vector3(0, 0.5f, 0);
+        }
     }
 }
