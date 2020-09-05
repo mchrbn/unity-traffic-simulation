@@ -7,10 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
-using UnityEditorInternal;
 
-namespace TrafficSimulation{
-
+namespace TrafficSimulation {
     [CustomEditor(typeof(TrafficSystem))]
     public class TrafficEditor : Editor {
 
@@ -22,18 +20,17 @@ namespace TrafficSimulation{
         private Waypoint lastWaypoint;
         
         [MenuItem("Component/Traffic Simulation/Create Traffic Objects")]
-        static void CreateTraffic(){
-            //Create new Undo Group to collect all changes in one Undo
-            Undo.SetCurrentGroupName("Create Traffic Objects");
+        private static void CreateTraffic(){
+            EditorHelper.SetUndoGroup("Create Traffic Objects");
             
-            GameObject mainGo = CreateGameObjectWithUndo("Traffic System");
+            GameObject mainGo = EditorHelper.CreateGameObject("Traffic System");
             mainGo.transform.position = Vector3.zero;
-            AddComponentWithUndo<TrafficSystem>(mainGo);
+            EditorHelper.AddComponent<TrafficSystem>(mainGo);
 
-            GameObject segmentsGo = CreateGameObjectWithUndo("Segments", mainGo.transform);
+            GameObject segmentsGo = EditorHelper.CreateGameObject("Segments", mainGo.transform);
             segmentsGo.transform.position = Vector3.zero;
 
-            GameObject intersectionsGo = CreateGameObjectWithUndo("Intersections", mainGo.transform);
+            GameObject intersectionsGo = EditorHelper.CreateGameObject("Intersections", mainGo.transform);
             intersectionsGo.transform.position = Vector3.zero;
             
             //Close Undo Operation
@@ -57,7 +54,7 @@ namespace TrafficSimulation{
                         return;
                     }
 
-                    BeginUndoGroup("Add Waypoint");
+                    EditorHelper.BeginUndoGroup("Add Waypoint", wps);
                     AddWaypoint(hit.point);
 
                     //Close Undo Group
@@ -66,7 +63,7 @@ namespace TrafficSimulation{
 
                 //Create a segment + add a new waypoint on mouseclick + ctrl
                 else if (e.control) {
-                    BeginUndoGroup("Add Segment");
+                    EditorHelper.BeginUndoGroup("Add Segment", wps);
                     AddSegment(hit.point);
                     AddWaypoint(hit.point);
 
@@ -76,7 +73,7 @@ namespace TrafficSimulation{
 
                 //Create an intersection type
                 else if (e.alt) {
-                    BeginUndoGroup("Add Intersection");
+                    EditorHelper.BeginUndoGroup("Add Intersection", wps);
                     AddIntersection(hit.point);
 
                     //Close Undo Group
@@ -90,7 +87,7 @@ namespace TrafficSimulation{
             //Handle the selected waypoint
             if (lastWaypoint != null) {
                 //Uses a endless plain for the ray to hit
-                Plane plane = new Plane(Vector3.up.normalized, lastWaypoint.transform.position);
+                Plane plane = new Plane(Vector3.up.normalized, lastWaypoint.GetVisualPos());
                 plane.Raycast(ray, out float dst);
                 Vector3 hitPoint = ray.GetPoint(dst);
 
@@ -117,14 +114,14 @@ namespace TrafficSimulation{
                 }
 
                 //Draw a Sphere
-                Handles.SphereHandleCap(0, lastWaypoint.transform.position, Quaternion.identity, wps.waypointSize * 2f, EventType.Repaint);
+                Handles.SphereHandleCap(0, lastWaypoint.GetVisualPos(), Quaternion.identity, wps.waypointSize * 2f, EventType.Repaint);
                 HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
                 SceneView.RepaintAll();
             }
 
             //Set the current hovering waypoint
             if (lastWaypoint == null) {
-                lastWaypoint = wps.GetAllWaypoints().FirstOrDefault(i => SphereHit(i.transform.position, wps.waypointSize, ray));
+                lastWaypoint = wps.GetAllWaypoints().FirstOrDefault(i => EditorHelper.SphereHit(i.GetVisualPos(), wps.waypointSize, ray));
             }
 
             //Update the current segment to the currently interacting one
@@ -138,52 +135,17 @@ namespace TrafficSimulation{
             }
         }
 
-        public override void OnInspectorGUI(){
+        public override void OnInspectorGUI() {
             EditorGUI.BeginChangeCheck();
-            
-            //Editor properties
-            EditorGUILayout.LabelField("Guizmo Config", EditorStyles.boldLabel);
-            wps.hideGuizmos = EditorGUILayout.Toggle("Hide Guizmos", wps.hideGuizmos);
-            
-            //ArrowDrawType selection
-            wps.arrowDrawType = (ArrowDraw) EditorGUILayout.EnumPopup("Arrow Draw Type", wps.arrowDrawType);
-            EditorGUI.indentLevel++;
 
-            switch (wps.arrowDrawType) {
-                case ArrowDraw.FixedCount:
-                    wps.arrowCount = Mathf.Max(1, EditorGUILayout.IntField("Count", wps.arrowCount));
-                    break;
-                case ArrowDraw.ByLength:
-                    wps.arrowDistance = EditorGUILayout.FloatField("Distance Between Arrows", wps.arrowDistance);
-                    break;
-                case ArrowDraw.Off:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            
-            if (wps.arrowDrawType != ArrowDraw.Off) {
-                wps.arrowSizeWaypoint = EditorGUILayout.FloatField("Arrow Size Waypoint", wps.arrowSizeWaypoint);
-                wps.arrowSizeIntersection = EditorGUILayout.FloatField("Arrow Size Intersection", wps.arrowSizeIntersection);
-            }
-            
-            EditorGUI.indentLevel--;
+            //Register an Undo if changes are made after this call
+            Undo.RecordObject(wps, "Traffic Inspector Edit");
 
-            wps.waypointSize = EditorGUILayout.FloatField("Waypoint Size", wps.waypointSize);
-            
-            //System Config
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("System Config", EditorStyles.boldLabel);
-            wps.segDetectThresh = EditorGUILayout.FloatField("Segment Detection Threshold", wps.segDetectThresh);
-            
-            //Helper
-            EditorGUILayout.Space();
-            EditorGUILayout.HelpBox("Ctrl + Left Click to create a new segment\nShift + Left Click to create a new waypoint.\nAlt + Left Click to create a new intersection", MessageType.Info);
-            EditorGUILayout.HelpBox("Reminder: The cars will follow the point depending on the sequence you added them. (go to the 1st waypoint added, then to the second, etc.)", MessageType.Info);
-
+            //Draw the Inspector
+            TrafficEditorInspector.DrawInspector(wps, out bool restructureSystem);
 
             //Rename waypoints if some have been deleted
-            if(GUILayout.Button("Re-Structure Traffic System")){
+            if (restructureSystem) {
                 RestructureSystem();
             }
 
@@ -196,10 +158,10 @@ namespace TrafficSimulation{
         }
 
         private void AddWaypoint(Vector3 position) {
-            GameObject go = CreateGameObjectWithUndo("Waypoint-" + wps.curSegment.waypoints.Count, wps.curSegment.transform);
+            GameObject go = EditorHelper.CreateGameObject("Waypoint-" + wps.curSegment.waypoints.Count, wps.curSegment.transform);
             go.transform.position = position;
 
-            Waypoint wp = AddComponentWithUndo<Waypoint>(go);
+            Waypoint wp = EditorHelper.AddComponent<Waypoint>(go);
             wp.Refresh(wps.curSegment.waypoints.Count, wps.curSegment);
 
             //Record changes to the TrafficSystem (string not relevant here)
@@ -209,10 +171,10 @@ namespace TrafficSimulation{
 
         private void AddSegment(Vector3 position) {
             int segId = wps.segments.Count;
-            GameObject segGo = CreateGameObjectWithUndo("Segment-" + segId, wps.transform.GetChild(0).transform);
+            GameObject segGo = EditorHelper.CreateGameObject("Segment-" + segId, wps.transform.GetChild(0).transform);
             segGo.transform.position = position;
 
-            wps.curSegment = AddComponentWithUndo<Segment>(segGo);
+            wps.curSegment = EditorHelper.AddComponent<Segment>(segGo);
             wps.curSegment.id = segId;
             wps.curSegment.waypoints = new List<Waypoint>();
             wps.curSegment.nextSegments = new List<Segment>();
@@ -224,12 +186,12 @@ namespace TrafficSimulation{
 
         private void AddIntersection(Vector3 position) {
             int intId = wps.intersections.Count;
-            GameObject intGo = CreateGameObjectWithUndo("Intersection-" + intId, wps.transform.GetChild(1).transform);
+            GameObject intGo = EditorHelper.CreateGameObject("Intersection-" + intId, wps.transform.GetChild(1).transform);
             intGo.transform.position = position;
 
-            BoxCollider bc = AddComponentWithUndo<BoxCollider>(intGo);
+            BoxCollider bc = EditorHelper.AddComponent<BoxCollider>(intGo);
             bc.isTrigger = true;
-            Intersection intersection = AddComponentWithUndo<Intersection>(intGo);
+            Intersection intersection = EditorHelper.AddComponent<Intersection>(intGo);
             intersection.id = intId;
 
             //Record changes to the TrafficSystem (string not relevant here)
@@ -238,7 +200,6 @@ namespace TrafficSimulation{
         }
 
         void RestructureSystem(){
-
             //Rename and restructure segments and waypoitns
             List<Segment> nSegments = new List<Segment>();
             int itSeg = 0;
@@ -294,45 +255,6 @@ namespace TrafficSimulation{
             }
 
             Debug.Log("[Traffic Simulation] Successfully rebuilt the traffic system.");
-        }
-
-        private void BeginUndoGroup(string undoName) {
-            //Create new Undo Group to collect all changes in one Undo
-            Undo.SetCurrentGroupName(undoName);
-
-            //Register all TrafficSystem changes after this (string not relevant here)
-            Undo.RegisterFullObjectHierarchyUndo(wps.gameObject, undoName);
-        }
-
-        private static GameObject CreateGameObjectWithUndo(string name, Transform parent = null) {
-            GameObject newGameObject = new GameObject(name);
-
-            //Register changes (string not relevant here)
-            Undo.RegisterCreatedObjectUndo(newGameObject, "Spawn new GameObject");
-            Undo.SetTransformParent(newGameObject.transform, parent, "Set parent");
-
-            return newGameObject;
-        }
-
-        private static T AddComponentWithUndo<T>(GameObject target) where T : Component {
-            return Undo.AddComponent<T>(target);
-        }
-        
-        //Determines if a ray hits a sphere
-        private static bool SphereHit(Vector3 center, float radius, Ray r) {
-            Vector3 oc = r.origin - center;
-            float a = Vector3.Dot(r.direction, r.direction);
-            float b = 2f * Vector3.Dot(oc, r.direction);
-            float c = Vector3.Dot(oc, oc) - radius * radius;
-            float discriminant = b * b - 4f * a * c;
-
-            if (discriminant < 0f) {
-                return false;
-            }
-
-            float sqrt = Mathf.Sqrt(discriminant);
-
-            return -b - sqrt > 0f || -b + sqrt > 0f;
         }
     }
 }
