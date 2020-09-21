@@ -26,7 +26,6 @@ namespace TrafficSimulation{
         public List<Segment> lightsNbr1;
         public List<Segment> lightsNbr2;
 
-   
         List<GameObject> vehiclesQueue;
         [HideInInspector]
         public int curLightRed = 1;
@@ -48,6 +47,9 @@ namespace TrafficSimulation{
         }
 
         void OnTriggerEnter(Collider other) {
+            //Check if vehicle is already in the list if yes abort
+            if(IsAlreadyInIntersection(other.gameObject)) return;
+
             if(other.tag == "AutonomousVehicle" && intersectionType == IntersectionType.STOP)
                 TriggerStop(other.gameObject);
             else if(other.tag == "AutonomousVehicle" && intersectionType == IntersectionType.TRAFFIC_LIGHT)
@@ -74,15 +76,17 @@ namespace TrafficSimulation{
             if(!IsOnPrioritySegment(carAI)){
                 if(vehiclesQueue.Count > 0 || vehiclesInIntersection.Count > 0){
                     carAI.hasToStop = true;
+                    carAI.hasToGo = false;
                     vehiclesQueue.Add(vehicle);
                 }
                 else{
                     vehiclesInIntersection.Add(vehicle);
                     carAI.hasToGo = true;
+                    carAI.hasToStop = false;
                 }
             }
             else{
-                    vehiclesInIntersection.Add(vehicle);
+                vehiclesInIntersection.Add(vehicle);
             }
         }
 
@@ -101,6 +105,7 @@ namespace TrafficSimulation{
             // }
 
             vehicle.GetComponent<CarAI>().hasToGo = false;
+            vehicle.GetComponent<CarAI>().hasToStop = false;
             vehiclesInIntersection.Remove(vehicle);
             vehiclesQueue.Remove(vehicle);
 
@@ -114,10 +119,12 @@ namespace TrafficSimulation{
             int vehicleSegment = vehicle.GetComponent<CarAI>().curSeg;
             if(IsRedLightSegment(vehicleSegment)){
                 vehicle.GetComponent<CarAI>().hasToStop = true;
+                vehicle.GetComponent<CarAI>().hasToGo = false;
                 vehiclesQueue.Add(vehicle);
             }
             else{
                 vehicle.GetComponent<CarAI>().hasToGo = true;
+                vehicle.GetComponent<CarAI>().hasToStop = false;
             }
         }
 
@@ -161,6 +168,46 @@ namespace TrafficSimulation{
                     return true;
             }
             return false;
+        }
+
+        bool IsAlreadyInIntersection(GameObject target){
+            foreach(GameObject vehicle in vehiclesInIntersection){
+                if(vehicle.GetInstanceID() == target.GetInstanceID()) return true;
+            }
+            foreach(GameObject vehicle in vehiclesQueue){
+                if(vehicle.GetInstanceID() == target.GetInstanceID()) return true;
+            }
+
+            return false;
+        } 
+
+        List<GameObject> memVehiclesQueue;
+        List<GameObject> memVehiclesInIntersection;
+
+        public void SaveIntersectionStatus(){
+            memVehiclesQueue = vehiclesQueue;
+            memVehiclesInIntersection = vehiclesInIntersection;
+        }
+
+        public void ResumeIntersectionStatus(){
+            foreach(GameObject v in vehiclesInIntersection){
+                foreach(GameObject v2 in memVehiclesInIntersection){
+                    if(v.GetInstanceID() == v2.GetInstanceID()){
+                        v.GetComponent<CarAI>().hasToStop = v2.GetComponent<CarAI>().hasToStop;
+                        v.GetComponent<CarAI>().hasToGo = v2.GetComponent<CarAI>().hasToGo;
+                        break;
+                    }
+                }
+            }
+            foreach(GameObject v in vehiclesQueue){
+                foreach(GameObject v2 in memVehiclesQueue){
+                    if(v.GetInstanceID() == v2.GetInstanceID()){
+                        v.GetComponent<CarAI>().hasToStop = v2.GetComponent<CarAI>().hasToStop;
+                        v.GetComponent<CarAI>().hasToGo = v2.GetComponent<CarAI>().hasToGo;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

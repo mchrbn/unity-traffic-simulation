@@ -31,6 +31,18 @@ namespace TrafficSimulation {
 
             return points;
         }
+
+        public void SaveTrafficSystem(){
+            Intersection[] its  = GameObject.FindObjectsOfType<Intersection>();
+            foreach(Intersection it in its)
+                it.SaveIntersectionStatus();
+        }
+
+        public void ResumeTrafficSystem(){
+            Intersection[] its  = GameObject.FindObjectsOfType<Intersection>();
+            foreach(Intersection it in its)
+                it.ResumeIntersectionStatus();
+        }
     }
 
     public enum ArrowDraw {
