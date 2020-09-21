@@ -181,8 +181,8 @@ namespace TrafficSimulation{
             return false;
         } 
 
-        List<GameObject> memVehiclesQueue;
-        List<GameObject> memVehiclesInIntersection;
+        List<GameObject> memVehiclesQueue = new List<GameObject>();
+        List<GameObject> memVehiclesInIntersection = new List<GameObject>();
 
         public void SaveIntersectionStatus(){
             memVehiclesQueue = vehiclesQueue;
