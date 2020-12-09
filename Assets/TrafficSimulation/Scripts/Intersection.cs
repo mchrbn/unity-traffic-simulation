@@ -64,25 +64,18 @@ namespace TrafficSimulation{
         }
 
         void TriggerStop(GameObject vehicle){
-            //Check if there are other cars in the queue
-            //if that's the case, stop the vehicle
 
-            // if(vehiclesQueue.Count > 0){
-            //     vehicle.GetComponent<CarAI>().hasToStop = true;
-            // }
-            // vehiclesQueue.Add(vehicle);
-
-            CarAI carAI = vehicle.GetComponent<CarAI>();
-            if(!IsOnPrioritySegment(carAI)){
+            VehicleAI vehicleAI = vehicle.GetComponent<VehicleAI>();
+            if(!IsOnPrioritySegment(vehicleAI)){
                 if(vehiclesQueue.Count > 0 || vehiclesInIntersection.Count > 0){
-                    carAI.hasToStop = true;
-                    carAI.hasToGo = false;
+                    vehicleAI.hasToStop = true;
+                    vehicleAI.hasToGo = false;
                     vehiclesQueue.Add(vehicle);
                 }
                 else{
                     vehiclesInIntersection.Add(vehicle);
-                    carAI.hasToGo = true;
-                    carAI.hasToStop = false;
+                    vehicleAI.hasToGo = true;
+                    vehicleAI.hasToStop = false;
                 }
             }
             else{
@@ -91,46 +84,34 @@ namespace TrafficSimulation{
         }
 
         void ExitStop(GameObject vehicle){
-            // if(vehiclesQueue.Count == 0)
-            //     return;
 
-            // //Remove from queue move the next vehicle
-            // vehicle.GetComponent<CarAI>().hasToGo = false;
-            // vehiclesQueue.RemoveAt(0);
-
-            // //Get next car in queue and make it move
-            // if(vehiclesQueue.Count > 0){
-            //     vehiclesQueue[0].GetComponent<CarAI>().hasToStop = false;
-            //     vehiclesQueue[0].GetComponent<CarAI>().hasToGo = true;
-            // }
-
-            vehicle.GetComponent<CarAI>().hasToGo = false;
-            vehicle.GetComponent<CarAI>().hasToStop = false;
+            vehicle.GetComponent<VehicleAI>().hasToGo = false;
+            vehicle.GetComponent<VehicleAI>().hasToStop = false;
             vehiclesInIntersection.Remove(vehicle);
             vehiclesQueue.Remove(vehicle);
 
             if(vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0){
-                vehiclesQueue[0].GetComponent<CarAI>().hasToStop = false;
-                vehiclesQueue[0].GetComponent<CarAI>().hasToGo = true;
+                vehiclesQueue[0].GetComponent<VehicleAI>().hasToStop = false;
+                vehiclesQueue[0].GetComponent<VehicleAI>().hasToGo = true;
             }
         }
 
         void TriggerLight(GameObject vehicle){
-            int vehicleSegment = vehicle.GetComponent<CarAI>().curSeg;
+            int vehicleSegment = vehicle.GetComponent<VehicleAI>().curSeg;
             if(IsRedLightSegment(vehicleSegment)){
-                vehicle.GetComponent<CarAI>().hasToStop = true;
-                vehicle.GetComponent<CarAI>().hasToGo = false;
+                vehicle.GetComponent<VehicleAI>().hasToStop = true;
+                vehicle.GetComponent<VehicleAI>().hasToGo = false;
                 vehiclesQueue.Add(vehicle);
             }
             else{
-                vehicle.GetComponent<CarAI>().hasToGo = true;
-                vehicle.GetComponent<CarAI>().hasToStop = false;
+                vehicle.GetComponent<VehicleAI>().hasToGo = true;
+                vehicle.GetComponent<VehicleAI>().hasToStop = false;
             }
         }
 
         void ExitLight(GameObject vehicle){
-            vehicle.GetComponent<CarAI>().hasToStop = false;
-            vehicle.GetComponent<CarAI>().hasToGo = false;
+            vehicle.GetComponent<VehicleAI>().hasToStop = false;
+            vehicle.GetComponent<VehicleAI>().hasToGo = false;
         }
 
         bool IsRedLightSegment(int vehicleSegment){
@@ -153,18 +134,18 @@ namespace TrafficSimulation{
             //Move all vehicles in queue
             List<GameObject> nVehiclesQueue = new List<GameObject>(vehiclesQueue);
             foreach(GameObject vehicle in vehiclesQueue){
-                if(!IsRedLightSegment(vehicle.GetComponent<CarAI>().curSeg)){
-                    vehicle.GetComponent<CarAI>().hasToStop = false;
-                    vehicle.GetComponent<CarAI>().hasToGo = true;
+                if(!IsRedLightSegment(vehicle.GetComponent<VehicleAI>().curSeg)){
+                    vehicle.GetComponent<VehicleAI>().hasToStop = false;
+                    vehicle.GetComponent<VehicleAI>().hasToGo = true;
                     nVehiclesQueue.Remove(vehicle);
                 }
             }
             vehiclesQueue = nVehiclesQueue;
         }
 
-        bool IsOnPrioritySegment(CarAI carAI){
+        bool IsOnPrioritySegment(VehicleAI vehicleAI){
             foreach(Segment nsSeg in prioritySegments){
-                if(carAI.curSeg == nsSeg.id)
+                if(vehicleAI.curSeg == nsSeg.id)
                     return true;
             }
             return false;
@@ -193,8 +174,8 @@ namespace TrafficSimulation{
             foreach(GameObject v in vehiclesInIntersection){
                 foreach(GameObject v2 in memVehiclesInIntersection){
                     if(v.GetInstanceID() == v2.GetInstanceID()){
-                        v.GetComponent<CarAI>().hasToStop = v2.GetComponent<CarAI>().hasToStop;
-                        v.GetComponent<CarAI>().hasToGo = v2.GetComponent<CarAI>().hasToGo;
+                        v.GetComponent<VehicleAI>().hasToStop = v2.GetComponent<VehicleAI>().hasToStop;
+                        v.GetComponent<VehicleAI>().hasToGo = v2.GetComponent<VehicleAI>().hasToGo;
                         break;
                     }
                 }
@@ -202,8 +183,8 @@ namespace TrafficSimulation{
             foreach(GameObject v in vehiclesQueue){
                 foreach(GameObject v2 in memVehiclesQueue){
                     if(v.GetInstanceID() == v2.GetInstanceID()){
-                        v.GetComponent<CarAI>().hasToStop = v2.GetComponent<CarAI>().hasToStop;
-                        v.GetComponent<CarAI>().hasToGo = v2.GetComponent<CarAI>().hasToGo;
+                        v.GetComponent<VehicleAI>().hasToStop = v2.GetComponent<VehicleAI>().hasToStop;
+                        v.GetComponent<VehicleAI>().hasToGo = v2.GetComponent<VehicleAI>().hasToGo;
                         break;
                     }
                 }

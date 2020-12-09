@@ -27,7 +27,7 @@ namespace TrafficSimulation {
 
             //Helper
             HelpBox("Ctrl + Left Click to create a new segment\nShift + Left Click to create a new waypoint.\nAlt + Left Click to create a new intersection");
-            HelpBox("Reminder: The cars will follow the point depending on the sequence you added them. (go to the 1st waypoint added, then to the second, etc.)");
+            HelpBox("Reminder: The vehicles will follow the point depending on the sequence you added them. (go to the 1st waypoint added, then to the second, etc.)");
             EditorGUILayout.Space();
 
             restructureSystem = Button("Re-Structure Traffic System");

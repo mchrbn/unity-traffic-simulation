@@ -7,11 +7,11 @@ public class Deactivate : MonoBehaviour
 {
     bool isActive = true;
 
-    GameObject[] cars;
+    GameObject[] vehicles;
     TrafficSystem ts;
 
     void Start(){
-        cars = GameObject.FindGameObjectsWithTag("AutonomousVehicle");
+        vehicles = GameObject.FindGameObjectsWithTag("AutonomousVehicle");
         ts = GameObject.FindObjectOfType<TrafficSystem>();
     }
 
@@ -21,15 +21,15 @@ public class Deactivate : MonoBehaviour
             if(isActive){
                 isActive = false;
                 ts.SaveTrafficSystem();
-                foreach(GameObject car in cars){
-                    car.SetActive(false);
+                foreach(GameObject vehicle in vehicles){
+                    vehicle.SetActive(false);
                 }
             }
             else{
                 isActive = true;
 
-                foreach(GameObject car in cars){
-                    car.SetActive(true);
+                foreach(GameObject vehicle in vehicles){
+                    vehicle.SetActive(true);
                     
                 }
                 ts.ResumeTrafficSystem();
