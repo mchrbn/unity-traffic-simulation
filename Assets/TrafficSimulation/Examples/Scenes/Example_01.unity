@@ -5651,7 +5651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -8122,7 +8122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -26886,7 +26886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -27150,7 +27150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -27459,7 +27459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -27807,7 +27807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -28179,7 +28179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -29091,7 +29091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -29547,7 +29547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -29895,7 +29895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -30474,7 +30474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -30768,7 +30768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -31110,7 +31110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -31270,7 +31270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -32330,7 +32330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -32988,7 +32988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -33318,7 +33318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -33751,7 +33751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 100
   brakeTorque: 100000
@@ -34092,7 +34092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -34738,7 +34738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -34964,7 +34964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -35628,7 +35628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 500000
@@ -36006,7 +36006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -36467,7 +36467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -36852,7 +36852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -37234,7 +37234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -37862,7 +37862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -38448,7 +38448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -38802,7 +38802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -39138,7 +39138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -39868,7 +39868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -40088,7 +40088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -40917,7 +40917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -41207,7 +41207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -41473,7 +41473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -42081,7 +42081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -42690,7 +42690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
@@ -43139,7 +43139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 60
-  steeringSpeed: 7
+  steeringSpeed: 10
   steeringSpeedThresh: 1.5
   maxTorque: 200
   brakeTorque: 100000
