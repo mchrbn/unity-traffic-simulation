@@ -200,17 +200,19 @@ namespace TrafficSimulation {
         }
 
         void RestructureSystem(){
-            //Rename and restructure segments and waypoitns
+            //Rename and restructure segments and waypoints
             List<Segment> nSegments = new List<Segment>();
             int itSeg = 0;
-            foreach(Segment segment in wps.segments){
+            foreach(Transform tS in wps.transform.GetChild(0).transform){
+                Segment segment = tS.GetComponent<Segment>();
                 if(segment != null){
                     List<Waypoint> nWaypoints = new List<Waypoint>();
                     segment.id = itSeg;
                     segment.gameObject.name = "Segment-" + itSeg;
                     
                     int itWp = 0;
-                    foreach(Waypoint waypoint in segment.waypoints){
+                    foreach(Transform tW in segment.gameObject.transform){
+                        Waypoint waypoint = tW.GetComponent<Waypoint>();
                         if(waypoint != null) {
                             waypoint.Refresh(itWp, segment);
                             nWaypoints.Add(waypoint);
@@ -239,7 +241,8 @@ namespace TrafficSimulation {
             //Check intersections
             List<Intersection> nIntersections = new List<Intersection>();
             int itInter = 0;
-            foreach(Intersection intersection in wps.intersections){
+            foreach(Transform tI in wps.transform.GetChild(1).transform){
+                Intersection intersection = tI.GetComponent<Intersection>();
                 if(intersection != null){
                     intersection.id = itInter;
                     intersection.gameObject.name = "Intersection-" + itInter;

@@ -1,7 +1,6 @@
-﻿// Traffic Simulation
+// Traffic Simulation
 // https://github.com/mchrbn/unity-traffic-simulation
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,13 +11,12 @@ namespace TrafficSimulation{
     }
 
     public class Intersection : MonoBehaviour
-    {
+    {   
         public IntersectionType intersectionType;
-        public int id;
+        public int id;  
 
         //For stop only
         public List<Segment> prioritySegments;
-        List<GameObject> vehiclesInIntersection;
 
         //For traffic lights only
         public float lightsDuration = 8;
@@ -26,9 +24,11 @@ namespace TrafficSimulation{
         public List<Segment> lightsNbr1;
         public List<Segment> lightsNbr2;
 
-        List<GameObject> vehiclesQueue;
-        [HideInInspector]
-        public int curLightRed = 1;
+        private List<GameObject> vehiclesQueue;
+        private List<GameObject> vehiclesInIntersection;
+        private TrafficSystem trafficSystem;
+        
+        [HideInInspector] public int currentRedLightsGroup = 1;
 
         void Start(){
             vehiclesQueue = new List<GameObject>();
@@ -39,91 +39,91 @@ namespace TrafficSimulation{
 
         void SwitchLights(){
 
-            if(curLightRed == 1) curLightRed = 2;
-            else if(curLightRed == 2) curLightRed = 1;            
+            if(currentRedLightsGroup == 1) currentRedLightsGroup = 2;
+            else if(currentRedLightsGroup == 2) currentRedLightsGroup = 1;            
             
             //Wait few seconds after light transition before making the other car move (= orange light)
             Invoke("MoveVehiclesQueue", orangeLightDuration);
         }
 
-        void OnTriggerEnter(Collider other) {
+        void OnTriggerEnter(Collider _other) {
+
             //Check if vehicle is already in the list if yes abort
-            if(IsAlreadyInIntersection(other.gameObject)) return;
+            //Also abort if we just started the scene (if vehicles inside colliders at start)
+            if(IsAlreadyInIntersection(_other.gameObject) || Time.timeSinceLevelLoad < .5f) return;
 
-            if(other.tag == "AutonomousVehicle" && intersectionType == IntersectionType.STOP)
-                TriggerStop(other.gameObject);
-            else if(other.tag == "AutonomousVehicle" && intersectionType == IntersectionType.TRAFFIC_LIGHT)
-                TriggerLight(other.gameObject);
+            if(_other.tag == "AutonomousVehicle" && intersectionType == IntersectionType.STOP)
+                TriggerStop(_other.gameObject);
+            else if(_other.tag == "AutonomousVehicle" && intersectionType == IntersectionType.TRAFFIC_LIGHT)
+                TriggerLight(_other.gameObject);
         }
 
-        void OnTriggerExit(Collider other) {
-            if(other.tag == "AutonomousVehicle" && intersectionType == IntersectionType.STOP)
-                ExitStop(other.gameObject);
-            else if(other.tag == "AutonomousVehicle" && intersectionType == IntersectionType.TRAFFIC_LIGHT)
-                ExitLight(other.gameObject);
+        void OnTriggerExit(Collider _other) {
+            if(_other.tag == "AutonomousVehicle" && intersectionType == IntersectionType.STOP)
+                ExitStop(_other.gameObject);
+            else if(_other.tag == "AutonomousVehicle" && intersectionType == IntersectionType.TRAFFIC_LIGHT)
+                ExitLight(_other.gameObject);
         }
 
-        void TriggerStop(GameObject vehicle){
+        void TriggerStop(GameObject _vehicle){
+            VehicleAI vehicleAI = _vehicle.GetComponent<VehicleAI>();
+            
+            //Depending on the waypoint threshold, the car can be either on the target segment or on the past segment
+            int vehicleSegment = vehicleAI.GetSegmentVehicleIsIn();
 
-            VehicleAI vehicleAI = vehicle.GetComponent<VehicleAI>();
-            if(!IsOnPrioritySegment(vehicleAI)){
+            if(!IsPrioritySegment(vehicleSegment)){
                 if(vehiclesQueue.Count > 0 || vehiclesInIntersection.Count > 0){
                     vehicleAI.hasToStop = true;
-                    vehicleAI.hasToGo = false;
-                    vehiclesQueue.Add(vehicle);
+                    vehiclesQueue.Add(_vehicle);
                 }
                 else{
-                    vehiclesInIntersection.Add(vehicle);
-                    vehicleAI.hasToGo = true;
+                    vehiclesInIntersection.Add(_vehicle);
                     vehicleAI.hasToStop = false;
                 }
             }
             else{
-                vehiclesInIntersection.Add(vehicle);
+                vehiclesInIntersection.Add(_vehicle);
             }
         }
 
-        void ExitStop(GameObject vehicle){
+        void ExitStop(GameObject _vehicle){
 
-            vehicle.GetComponent<VehicleAI>().hasToGo = false;
-            vehicle.GetComponent<VehicleAI>().hasToStop = false;
-            vehiclesInIntersection.Remove(vehicle);
-            vehiclesQueue.Remove(vehicle);
+            _vehicle.GetComponent<VehicleAI>().hasToStop = false;
+            vehiclesInIntersection.Remove(_vehicle);
+            vehiclesQueue.Remove(_vehicle);
 
             if(vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0){
                 vehiclesQueue[0].GetComponent<VehicleAI>().hasToStop = false;
-                vehiclesQueue[0].GetComponent<VehicleAI>().hasToGo = true;
             }
         }
 
-        void TriggerLight(GameObject vehicle){
-            int vehicleSegment = vehicle.GetComponent<VehicleAI>().curSeg;
+        void TriggerLight(GameObject _vehicle){
+            VehicleAI vehicleAI = _vehicle.GetComponent<VehicleAI>();
+            int vehicleSegment = vehicleAI.GetSegmentVehicleIsIn();
+
             if(IsRedLightSegment(vehicleSegment)){
-                vehicle.GetComponent<VehicleAI>().hasToStop = true;
-                vehicle.GetComponent<VehicleAI>().hasToGo = false;
-                vehiclesQueue.Add(vehicle);
+                vehicleAI.hasToStop = true;
+                vehiclesQueue.Add(_vehicle);
             }
             else{
-                vehicle.GetComponent<VehicleAI>().hasToGo = true;
-                vehicle.GetComponent<VehicleAI>().hasToStop = false;
+                vehicleAI.hasToStop = false;
             }
         }
 
-        void ExitLight(GameObject vehicle){
-            vehicle.GetComponent<VehicleAI>().hasToStop = false;
-            vehicle.GetComponent<VehicleAI>().hasToGo = false;
+        void ExitLight(GameObject _vehicle){
+            _vehicle.GetComponent<VehicleAI>().hasToStop = false;
         }
 
-        bool IsRedLightSegment(int vehicleSegment){
-            if(curLightRed == 1){
+        bool IsRedLightSegment(int _vehicleSegment){
+            if(currentRedLightsGroup == 1){
                 foreach(Segment segment in lightsNbr1){
-                    if(segment.id == vehicleSegment)
+                    if(segment.id == _vehicleSegment)
                         return true;
                 }
             }
             else{
                 foreach(Segment segment in lightsNbr2){
-                    if(segment.id == vehicleSegment)
+                    if(segment.id == _vehicleSegment)
                         return true;
                 }
             }
@@ -134,36 +134,37 @@ namespace TrafficSimulation{
             //Move all vehicles in queue
             List<GameObject> nVehiclesQueue = new List<GameObject>(vehiclesQueue);
             foreach(GameObject vehicle in vehiclesQueue){
-                if(!IsRedLightSegment(vehicle.GetComponent<VehicleAI>().curSeg)){
+                int vehicleSegment = vehicle.GetComponent<VehicleAI>().GetSegmentVehicleIsIn();
+                if(!IsRedLightSegment(vehicleSegment)){
                     vehicle.GetComponent<VehicleAI>().hasToStop = false;
-                    vehicle.GetComponent<VehicleAI>().hasToGo = true;
                     nVehiclesQueue.Remove(vehicle);
                 }
             }
             vehiclesQueue = nVehiclesQueue;
         }
 
-        bool IsOnPrioritySegment(VehicleAI vehicleAI){
-            foreach(Segment nsSeg in prioritySegments){
-                if(vehicleAI.curSeg == nsSeg.id)
+        bool IsPrioritySegment(int _vehicleSegment){
+            foreach(Segment s in prioritySegments){
+                if(_vehicleSegment == s.id)
                     return true;
             }
             return false;
         }
 
-        bool IsAlreadyInIntersection(GameObject target){
+        bool IsAlreadyInIntersection(GameObject _target){
             foreach(GameObject vehicle in vehiclesInIntersection){
-                if(vehicle.GetInstanceID() == target.GetInstanceID()) return true;
+                if(vehicle.GetInstanceID() == _target.GetInstanceID()) return true;
             }
             foreach(GameObject vehicle in vehiclesQueue){
-                if(vehicle.GetInstanceID() == target.GetInstanceID()) return true;
+                if(vehicle.GetInstanceID() == _target.GetInstanceID()) return true;
             }
 
             return false;
         } 
 
-        List<GameObject> memVehiclesQueue = new List<GameObject>();
-        List<GameObject> memVehiclesInIntersection = new List<GameObject>();
+
+        private List<GameObject> memVehiclesQueue = new List<GameObject>();
+        private List<GameObject> memVehiclesInIntersection = new List<GameObject>();
 
         public void SaveIntersectionStatus(){
             memVehiclesQueue = vehiclesQueue;
@@ -175,7 +176,6 @@ namespace TrafficSimulation{
                 foreach(GameObject v2 in memVehiclesInIntersection){
                     if(v.GetInstanceID() == v2.GetInstanceID()){
                         v.GetComponent<VehicleAI>().hasToStop = v2.GetComponent<VehicleAI>().hasToStop;
-                        v.GetComponent<VehicleAI>().hasToGo = v2.GetComponent<VehicleAI>().hasToGo;
                         break;
                     }
                 }
@@ -184,7 +184,6 @@ namespace TrafficSimulation{
                 foreach(GameObject v2 in memVehiclesQueue){
                     if(v.GetInstanceID() == v2.GetInstanceID()){
                         v.GetComponent<VehicleAI>().hasToStop = v2.GetComponent<VehicleAI>().hasToStop;
-                        v.GetComponent<VehicleAI>().hasToGo = v2.GetComponent<VehicleAI>().hasToGo;
                         break;
                     }
                 }

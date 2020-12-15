@@ -25,7 +25,7 @@ public class RedLightStatus : MonoBehaviour
     }
 
     void SetTrafficLightColor(){
-        if(lightGroupId == intersection.curLightRed)
+        if(lightGroupId == intersection.currentRedLightsGroup)
             pointLight.color = new Color(1, 0, 0);
         else
             pointLight.color = new Color(0, 1, 0);

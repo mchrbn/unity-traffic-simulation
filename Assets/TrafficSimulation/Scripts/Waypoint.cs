@@ -1,21 +1,15 @@
 ﻿// Traffic Simulation
 // https://github.com/mchrbn/unity-traffic-simulation
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TrafficSimulation {
     public class Waypoint : MonoBehaviour {
-        [HideInInspector]
-        public int id;
-        [HideInInspector]
-        public Segment segment;
+        [HideInInspector] public Segment segment;
 
-        public void Refresh(int newId, Segment newSegment) {
-            id = newId;
-            segment = newSegment;
-            name = "Waypoint-" + newId;
+        public void Refresh(int _newId, Segment _newSegment) {
+            segment = _newSegment;
+            name = "Waypoint-" + _newId;
             tag = "Waypoint";
             
             //Set the layer to Default

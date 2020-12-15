@@ -2,8 +2,6 @@
 // https://github.com/mchrbn/unity-traffic-simulation
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -62,7 +60,7 @@ namespace TrafficSimulation {
 
                 //Draw line linking segments
                 foreach (Segment nextSegment in segment.nextSegments) {
-                    if (nextSegment != null) {
+                    if (nextSegment != null){
                         Vector3 p1 = segment.waypoints.Last().GetVisualPos();
                         Vector3 p2 = nextSegment.waypoints.First().GetVisualPos();
 

@@ -1,19 +1,14 @@
 ﻿// Traffic Simulation
 // https://github.com/mchrbn/unity-traffic-simulation
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-// Traffic Simulation
-// https://github.com/mchrbn/unity-traffic-simulation
 
+using UnityEngine;
 using UnityEditor;
-using UnityEditorInternal;
 
 namespace TrafficSimulation {
     [CustomEditor(typeof(Intersection))]
     public class IntersectionEditor : Editor
     {
-        Intersection intersection;
+        private Intersection intersection;
 
         void OnEnable(){
             intersection = target as Intersection;
