@@ -160,6 +160,7 @@ namespace TrafficSimulation {
                     steering = Mathf.Clamp(this.transform.InverseTransformDirection(desiredVel.normalized).x, -1f, 1f);
                 }
                 else if(acc < 0){
+                    //TODO: Improve (mb raycast on the back)...rather stupid way to achieve this
                     float randomSteering = Random.Range(-.3f, .3f);
                     steering = randomSteering;
                 }

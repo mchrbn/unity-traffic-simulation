@@ -8,7 +8,7 @@ Developed / Tested with Unity 2018.3.x and plus.
 
 ## How to use
 ### Note
-If you launch the example scene, you will have to press the *Re-Structure Traffic System* button on the *Traffic System* GameObject to re-generate the traffic system or you might have errors.
+If you have any problem with the traffic system, press the *Re-Structure Traffic System* button on the *Traffic System* GameObject to re-generate the traffic system.
 
 ### Create a Traffic System
 1. Create a Traffic System via *Component -> Traffic Simulation -> Create Traffic Simulation*
@@ -41,16 +41,18 @@ If you delete existing segments or intersections, you will have to press the *Re
 3. Changing the light of your 3D model can be done via your own script. An example of this is provided in the example folder.
 
 ### Vehicle Configuration
-1. Add VehiclePhysic script and the usuals (wheel colliders, etc.) to your vehicle. See example scenes for reference on how to do so. Note: You can also use another vehicle's physics package such as Edy's Vehicle Physics - if that's the case, you will have to modify the *MoveVehicle* method in *VehicleAI* to make it move according to the physic asset you are using.
-2. Create an empty *GameObject* as a child of your vehicle and place it in front of your vehicle. This will be used as a starting location to cast your rays.
-3. Add *VehicleAI* script on your vehicle and set the variables. See examples for reference. Pay attention to the **Raycast** section, depending on the size of your environment you will have to set the right ray amount, length and spacing.
-4. Set your vehicle with the tag "AutonomousVehicle" and also a layer (applied to children too!) with the name "AutonomousVehicle"
-5. Place your vehicle on a segment. When your game run, it will automatically detect on which segment you are in and what is the nearest waypoint of that segment your vehicle has to reach.
+1. Setup your vehicle as follow (you can also refer to the vehicle in the example scene):
 
-
-## Assets used / Credits
-- [Minimalist Free](https://assetstore.unity.com/packages/vfx/shaders/minimalist-free-lowpoly-flat-gradient-shader-96148)  : Gradient skybox for demo scene
-- [Polarith AI Free](https://assetstore.unity.com/packages/tools/ai/polarith-ai-free-movement-steering-92029) : Using their vehicle physic class as well as their 3D vehicle models for the demo scene
+       -> Main object with Rigidbody + BoxCollider
+          -> Object with vehicle's body mesh (without the wheels!)
+          -> Empty object for the 4 wheels
+             -> Object with WheelCollider (but no mesh)
+             -> Object with WheelCollider (but no mesh)
+             -> Object with WheelCollider (but no mesh)
+             -> Object with WheelCollider (but no mesh)
+2. Select the vehicle object main parent and click on *Component -> Traffic Simulation -> Setup Vehicle*. This will add the needed scripts, set the proper layers and tag as well as create a raycast anchor.
+3. Place the raycast anchor in the front of the vehicle's hood.
+4. Configure *WheelDrive* and *VehicleAI* with your wanted paramters (torque, maximum speed, etc.).
 
 ---
 

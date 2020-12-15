@@ -49,5 +49,52 @@ namespace TrafficSimulation {
 
             return -b - sqrt > 0f || -b + sqrt > 0f;
         }
+
+        //From S_Darkwell: https://forum.unity.com/threads/adding-layer-by-script.41970/
+        public static void CreateLayer(string name){
+            if (string.IsNullOrEmpty(name))
+                throw new System.ArgumentNullException("name", "New layer name string is either null or empty.");
+
+            var tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+            var layerProps = tagManager.FindProperty("layers");
+            var propCount = layerProps.arraySize;
+
+            SerializedProperty firstEmptyProp = null;
+
+            for (var i = 0; i < propCount; i++)
+            {
+                var layerProp = layerProps.GetArrayElementAtIndex(i);
+
+                var stringValue = layerProp.stringValue;
+
+                if (stringValue == name) return;
+
+                if (i < 8 || stringValue != string.Empty) continue;
+
+                if (firstEmptyProp == null)
+                    firstEmptyProp = layerProp;
+            }
+
+            if (firstEmptyProp == null)
+            {
+                UnityEngine.Debug.LogError("Maximum limit of " + propCount + " layers exceeded. Layer \"" + name + "\" not created.");
+                return;
+            }
+
+            firstEmptyProp.stringValue = name;
+            tagManager.ApplyModifiedProperties();
+        }
+
+        //From SkywardRoy: https://forum.unity.com/threads/change-gameobject-layer-at-run-time-wont-apply-to-child.10091/
+        public static void SetLayer (this GameObject gameObject, int layer, bool includeChildren = false) {
+            if (!includeChildren) {
+                gameObject.layer = layer;
+                return;
+            }
+        
+            foreach (var child in gameObject.GetComponentsInChildren(typeof(Transform), true)) {
+                child.gameObject.layer = layer;
+            }
+        }
     }
 }
