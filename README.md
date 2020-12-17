@@ -52,7 +52,7 @@ If you delete existing segments or intersections, you will have to press the *Re
              -> Object with WheelCollider (but no mesh)
 2. Select the vehicle object main parent and click on *Component -> Traffic Simulation -> Setup Vehicle*. This will add the needed scripts, set the proper layers and tag as well as create a raycast anchor.
 3. Place the raycast anchor in the front of the vehicle's hood.
-4. Configure *WheelDrive* and *VehicleAI* with your wanted paramters (torque, maximum speed, etc.).
+4. Configure *WheelDrive* and *VehicleAI* with your wanted paramters (torque, maximum speed, etc.). Set the left and right wheel mesh - they will be instantiate in runtime where your wheelcolliders are located.
 
 ---
 

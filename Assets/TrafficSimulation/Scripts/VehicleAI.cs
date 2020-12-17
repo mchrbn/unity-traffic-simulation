@@ -27,6 +27,12 @@ namespace TrafficSimulation {
 
     */
 
+    public enum Status{
+        GO,
+        STOP,
+        SLOW_DOWN
+    }
+
     public class VehicleAI : MonoBehaviour
     {
         [Header("Traffic System")]
@@ -56,7 +62,8 @@ namespace TrafficSimulation {
         [Tooltip("If detected vehicle is below this distance (and above, above distance), ego vehicle will slow down")]
         public float slowDownThresh = 4f;
 
-        [HideInInspector] public bool hasToStop =  false;
+        //[HideInInspector] public bool hasToStop =  false;
+        [HideInInspector] public Status vehicleStatus = Status.GO;
 
         private WheelDrive wheelDrive;
         private int curWp = 0;
@@ -110,39 +117,53 @@ namespace TrafficSimulation {
             wheelDrive.maxSpeed = initMaxSpeed;
 
             //1. Check if the car has to stop
-            if(hasToStop){
+            if(vehicleStatus == Status.STOP){
                 acc = 0;
                 brake = 1;
                 wheelDrive.maxSpeed /= 2f;
             }
             else{
+                
+                if(vehicleStatus == Status.SLOW_DOWN){
+                    acc = .3f;
+                    brake = 0f;
+                }
+
                 //2. Check if there are vehicles which are detected by the radar
                 float hitDist;
                 VehicleAI otherVehicle = GetDetectedVehicle(out hitDist);
 
                 if(otherVehicle != null){
-
                     //Check if it's front vehicle
-                    float dot = Vector3.Dot(this.transform.forward, otherVehicle.transform.forward);
+                    float dotFront = Vector3.Dot(this.transform.forward, otherVehicle.transform.forward);
 
                     //If detected front vehicle max speed is lower than ego vehicle, then decrease ego vehicle max speed
-                    if(otherVehicle.wheelDrive.maxSpeed < wheelDrive.maxSpeed && dot > .8f){
+                    if(otherVehicle.wheelDrive.maxSpeed < wheelDrive.maxSpeed && dotFront > .8f){
                         float ms = Mathf.Max(wheelDrive.GetSpeedMS(otherVehicle.wheelDrive.maxSpeed) - .5f, .1f);
                         wheelDrive.maxSpeed = wheelDrive.GetSpeedUnit(ms);
                     }
                     
                     //If the two vehicles are too close, and facing the same direction, brake the ego vehicle
-                    if(hitDist < emergencyBrakeThresh && dot > .8f){
+                    if(hitDist < emergencyBrakeThresh && dotFront > .8f){
                         acc = 0;
                         brake = 1;
                         wheelDrive.maxSpeed = Mathf.Max(wheelDrive.maxSpeed / 2f, wheelDrive.minSpeed);
                     }
 
                     //If the two vehicles are too close, and not facing same direction, slight make the ego vehicle go backward
-                    else if(hitDist < emergencyBrakeThresh && dot <= .8f){
+                    else if(hitDist < emergencyBrakeThresh && dotFront <= .8f){
                         acc = -.3f;
                         brake = 0f;
                         wheelDrive.maxSpeed = Mathf.Max(wheelDrive.maxSpeed / 2f, wheelDrive.minSpeed);
+
+                        //Check if the vehicle we are close to is located on the right or left then apply according steering to try to make it move
+                        float dotRight = Vector3.Dot(this.transform.forward, otherVehicle.transform.right);
+                        //Right
+                        if(dotRight > 0.1f) steering = -.3f;
+                        //Left
+                        else if(dotRight < -0.1f) steering = .3f;
+                        //Middle
+                        else steering = -.7f;
                     }
 
                     //If the two vehicles are getting close, slow down their speed
@@ -154,15 +175,9 @@ namespace TrafficSimulation {
                 }
 
                 //Check if we need to steer to follow path
-                //if we are going backward, do not steer
                 if(acc > 0f){
                     Vector3 desiredVel = trafficSystem.segments[targetSegment].waypoints[curWp].transform.position - this.transform.position;
                     steering = Mathf.Clamp(this.transform.InverseTransformDirection(desiredVel.normalized).x, -1f, 1f);
-                }
-                else if(acc < 0){
-                    //TODO: Improve (mb raycast on the back)...rather stupid way to achieve this
-                    float randomSteering = Random.Range(-.3f, .3f);
-                    steering = randomSteering;
                 }
 
             }
