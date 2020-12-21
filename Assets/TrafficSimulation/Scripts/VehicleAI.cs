@@ -8,24 +8,14 @@ using UnityEngine;
 namespace TrafficSimulation {
 
     /*
-        [x] Check if speed assign is right (topspeed?)
-        [x] Option for not animating wheels
-        [x] Remove navmesh agent
         [-] Check prefab #6 issue
-        [x] Replace all car with vehicle
-        [-] Vehicle editor
-        [-] Better README, set instructions in wiki?
-        [x] Reorganize vehicle properties into one class
-        [x] HasToStop + HasToGo is probably not right way to do
-        [x] Tooltip on public fields
-        [x] Change VehiclePhysics
         [-] Deaccelerate when see stop in front
-        [x] Bug on red light, all cars start together
-        [x] Slow start of acceleration (on red light and stop)
-        [x] If car stop because of too close, make it go back a bit (?)
-        [x] Car stop if starts inside collider
-
     */
+
+    public struct Target{
+        public int segment;
+        public int waypoint;
+    }
 
     public enum Status{
         GO,
@@ -66,10 +56,10 @@ namespace TrafficSimulation {
         [HideInInspector] public Status vehicleStatus = Status.GO;
 
         private WheelDrive wheelDrive;
-        private int curWp = 0;
         private float initMaxSpeed = 0;
-        private int targetSegment = 0;
         private int pastTargetSegment = -1;
+        private Target currentTarget;
+        private Target futureTarget;
 
         void Start()
         {
@@ -92,18 +82,26 @@ namespace TrafficSimulation {
 
 
         void WaypointChecker(){
-            GameObject waypoint = trafficSystem.segments[targetSegment].waypoints[curWp].gameObject;
+            GameObject waypoint = trafficSystem.segments[currentTarget.segment].waypoints[currentTarget.waypoint].gameObject;
 
             //Position of next waypoint relative to the car
             Vector3 wpDist = this.transform.InverseTransformPoint(new Vector3(waypoint.transform.position.x, this.transform.position.y, waypoint.transform.position.z));
 
             //Go to next waypoint if arrived to current
             if(wpDist.magnitude < waypointThresh){
-                curWp++;
-                if(curWp >= trafficSystem.segments[targetSegment].waypoints.Count){
-                    pastTargetSegment = targetSegment;
-                    targetSegment = GetNextSegmentId();
-                    curWp = 0;
+                //Get next target
+                currentTarget.waypoint++;
+                if(currentTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count){
+                    pastTargetSegment = currentTarget.segment;
+                    currentTarget.segment = futureTarget.segment;
+                    currentTarget.waypoint = 0;
+                }
+
+                //Get future target
+                futureTarget.waypoint = currentTarget.waypoint + 1;
+                if(futureTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count){
+                    futureTarget.waypoint = 0;
+                    futureTarget.segment = GetNextSegmentId();
                 }
             }
         }
@@ -116,17 +114,29 @@ namespace TrafficSimulation {
             float steering = 0;
             wheelDrive.maxSpeed = initMaxSpeed;
 
-            //1. Check if the car has to stop
+            //Calculate if there is a planned turn
+            Transform targetTransform = trafficSystem.segments[currentTarget.segment].waypoints[currentTarget.waypoint].transform;
+            Transform futureTargetTransform = trafficSystem.segments[futureTarget.segment].waypoints[futureTarget.waypoint].transform;
+            Vector3 futureVel = futureTargetTransform.position - targetTransform.position;
+            float futureSteering = Mathf.Clamp(this.transform.InverseTransformDirection(futureVel.normalized).x, -1, 1);
+
+            //Check if the car has to stop
             if(vehicleStatus == Status.STOP){
                 acc = 0;
                 brake = 1;
-                wheelDrive.maxSpeed /= 2f;
+                wheelDrive.maxSpeed = Mathf.Min(wheelDrive.maxSpeed / 2f, 5f);
             }
             else{
                 
+                //Not full acceleration if have to slow down
                 if(vehicleStatus == Status.SLOW_DOWN){
                     acc = .3f;
                     brake = 0f;
+                }
+
+                //If planned to steer, decrease the speed
+                if(futureSteering > .3f || futureSteering < -.3f){
+                    wheelDrive.maxSpeed = Mathf.Min(wheelDrive.maxSpeed, wheelDrive.steeringSpeedMax);
                 }
 
                 //2. Check if there are vehicles which are detected by the radar
@@ -176,7 +186,7 @@ namespace TrafficSimulation {
 
                 //Check if we need to steer to follow path
                 if(acc > 0f){
-                    Vector3 desiredVel = trafficSystem.segments[targetSegment].waypoints[curWp].transform.position - this.transform.position;
+                    Vector3 desiredVel = trafficSystem.segments[currentTarget.segment].waypoints[currentTarget.waypoint].transform.position - this.transform.position;
                     steering = Mathf.Clamp(this.transform.InverseTransformDirection(desiredVel.normalized).x, -1f, 1f);
                 }
 
@@ -229,37 +239,46 @@ namespace TrafficSimulation {
         }
 
         int GetNextSegmentId(){
-            if(trafficSystem.segments[targetSegment].nextSegments.Count == 0)
+            if(trafficSystem.segments[currentTarget.segment].nextSegments.Count == 0)
                 return 0;
-            int c = Random.Range(0, trafficSystem.segments[targetSegment].nextSegments.Count);
-            return trafficSystem.segments[targetSegment].nextSegments[c].id;
+            int c = Random.Range(0, trafficSystem.segments[currentTarget.segment].nextSegments.Count);
+            return trafficSystem.segments[currentTarget.segment].nextSegments[c].id;
         }
 
         void SetWaypointVehicleIsOn(){
-            //Find segment
+            //Find current target
             foreach(Segment segment in trafficSystem.segments){
                 if(segment.IsOnSegment(this.transform.position)){
-                    targetSegment = segment.id;
+                    currentTarget.segment = segment.id;
 
                     //Find nearest waypoint to start within the segment
                     float minDist = float.MaxValue;
-                    for(int j=0; j<trafficSystem.segments[targetSegment].waypoints.Count; j++){
-                        float d = Vector3.Distance(this.transform.position, trafficSystem.segments[targetSegment].waypoints[j].transform.position);
+                    for(int j=0; j<trafficSystem.segments[currentTarget.segment].waypoints.Count; j++){
+                        float d = Vector3.Distance(this.transform.position, trafficSystem.segments[currentTarget.segment].waypoints[j].transform.position);
 
                         //Only take in front points
-                        Vector3 lSpace = this.transform.InverseTransformPoint(trafficSystem.segments[targetSegment].waypoints[j].transform.position);
+                        Vector3 lSpace = this.transform.InverseTransformPoint(trafficSystem.segments[currentTarget.segment].waypoints[j].transform.position);
                         if(d < minDist && lSpace.z > 0){
                             minDist = d;
-                            curWp = j;
+                            currentTarget.waypoint = j;
                         }
                     }
                     break;
                 }
             }
+
+            //Get future target
+            futureTarget.waypoint = currentTarget.waypoint + 1;
+            futureTarget.segment = currentTarget.segment;
+
+            if(futureTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count){
+                futureTarget.waypoint = 0;
+                futureTarget.segment = GetNextSegmentId();
+            }
         }
 
         public int GetSegmentVehicleIsIn(){
-            int vehicleSegment = targetSegment;
+            int vehicleSegment = currentTarget.segment;
             bool isOnSegment = trafficSystem.segments[vehicleSegment].IsOnSegment(this.transform.position);
             if(!isOnSegment){
                 bool isOnPSegement = trafficSystem.segments[pastTargetSegment].IsOnSegment(this.transform.position);

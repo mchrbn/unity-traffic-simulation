@@ -21,14 +21,17 @@ namespace TrafficSimulation{
 
     public class WheelDrive : MonoBehaviour
     {
+        [Tooltip("Downforce applied to the vehicle")]
+        public float downForce = 100f;
+
         [Tooltip("Maximum steering angle of the wheels")]
         public float maxAngle = 30f;
 
         [Tooltip("Speed at which we will reach the above steering angle (lerp)")]
-        public float steeringSpeed = 5f;
+        public float steeringLerp = 5f;
         
-        [Tooltip("If vehicle's speed below this number (m/s), will deaccelerate when it turns")]
-        public float steeringSpeedThresh = 1.5f;
+        [Tooltip("Max speed (in unit choosen below) when the vehicle is about to steer")]
+        public float steeringSpeedMax = 20f;
 
         [Tooltip("Maximum torque applied to the driving wheels")]
         public float maxTorque = 300f;
@@ -83,15 +86,10 @@ namespace TrafficSimulation{
         public void Move(float _acceleration, float _steering, float _brake)
         {
 
-            float nSteering = Mathf.Lerp(currentSteering, _steering, Time.deltaTime * steeringSpeed);
+            float nSteering = Mathf.Lerp(currentSteering, _steering, Time.deltaTime * steeringLerp);
             currentSteering = nSteering;
 
             Rigidbody rb = this.GetComponent<Rigidbody>();
-
-
-            //Slow down the car if we need to steer
-            if(nSteering > .3f || nSteering < -.3f && rb.velocity.magnitude > steeringSpeedThresh)
-                _acceleration = Mathf.Max(_acceleration / 1.5f, .4f);
 
             float angle = maxAngle * nSteering;
             float torque = maxTorque * _acceleration;
@@ -125,6 +123,10 @@ namespace TrafficSimulation{
             //Apply speed
             float s = GetSpeedUnit(rb.velocity.magnitude);
             if(s > maxSpeed) rb.velocity = GetSpeedMS(maxSpeed) * rb.velocity.normalized;
+
+            
+            //Apply downforce
+            rb.AddForce(-transform.up * downForce * rb.velocity.magnitude);
         }
 
         public float GetSpeedMS(float _s){

@@ -8,7 +8,8 @@ Developed / Tested with Unity 2018.3.x and plus.
 
 ## How to use
 ### Note
-If you have any problem with the traffic system, press the *Re-Structure Traffic System* button on the *Traffic System* GameObject to re-generate the traffic system.
+1. If you have any problem with the traffic system, press the *Re-Structure Traffic System* button on the *Traffic System* GameObject to re-generate the traffic system.
+2. Make sure to be in Top Orthographic view, in the editor, when you create your waypoint system.
 
 ### Create a Traffic System
 1. Create a Traffic System via *Component -> Traffic Simulation -> Create Traffic Simulation*

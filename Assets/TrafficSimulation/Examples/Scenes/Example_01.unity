@@ -144,7 +144,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1001 &14900784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -673,7 +673,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &59348715 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 36a2e895ccfc74f4aad14aca045e8cd4,
@@ -1434,7 +1434,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1001 &149307539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5221,7 +5221,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &471195181
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,7 +5637,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!114 &498139335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5650,9 +5650,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -6954,7 +6955,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -8108,7 +8109,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!114 &630856249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8121,9 +8122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -10010,7 +10012,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!23 &814283597
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10763,7 +10765,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &842771135
 GameObject:
   m_ObjectHideFlags: 0
@@ -17773,7 +17775,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &1453734299
 GameObject:
   m_ObjectHideFlags: 0
@@ -19031,7 +19033,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!23 &1601084254
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19752,7 +19754,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &1654736282
 GameObject:
   m_ObjectHideFlags: 0
@@ -20589,7 +20591,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &1750770667
 GameObject:
   m_ObjectHideFlags: 0
@@ -24138,7 +24140,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1001 &2018331996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25781,7 +25783,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1001 &2105328021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26885,9 +26887,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -26917,7 +26920,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &1809614698698968903
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27083,7 +27086,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &1809614698871672305
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27149,9 +27152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -27458,9 +27462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -27506,7 +27511,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!146 &1809614699026106368
 WheelCollider:
   m_ObjectHideFlags: 0
@@ -27756,7 +27761,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &1809614699083679988
 GameObject:
   m_ObjectHideFlags: 0
@@ -27806,9 +27811,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -28149,7 +28155,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &1809614699214763293
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28178,9 +28184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -29039,7 +29046,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &1809614699528808694
 GameObject:
   m_ObjectHideFlags: 0
@@ -29090,9 +29097,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -29546,9 +29554,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -29578,7 +29587,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &1809614699637939887
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29828,7 +29837,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &1809614699701416251
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29894,9 +29903,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -30406,7 +30416,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &1809614699890338067
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30473,9 +30483,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -30767,9 +30778,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -30799,7 +30811,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &1809614700007742495
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31109,9 +31121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -31157,7 +31170,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!146 &1809614700287250328
 WheelCollider:
   m_ObjectHideFlags: 0
@@ -31269,9 +31282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -31301,7 +31315,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &1809614700294587663
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32329,9 +32343,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -32987,9 +33002,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -33317,9 +33333,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -33750,9 +33767,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 100
   brakeTorque: 100000
   unitType: 0
@@ -34091,9 +34109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -34737,9 +34756,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -34963,9 +34983,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -35627,9 +35648,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 500000
   unitType: 0
@@ -36005,9 +36027,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -36466,9 +36489,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -36851,9 +36875,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -37233,9 +37258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -37861,9 +37887,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -38381,7 +38408,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &7118174903863567016
 GameObject:
   m_ObjectHideFlags: 0
@@ -38447,9 +38474,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -38801,9 +38829,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -38833,7 +38862,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!4 &7118174904075766904
 Transform:
   m_ObjectHideFlags: 0
@@ -39071,7 +39100,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!1 &7118174904155028312
 GameObject:
   m_ObjectHideFlags: 0
@@ -39137,9 +39166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -39801,7 +39831,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!4 &7118174904444216188
 Transform:
   m_ObjectHideFlags: 0
@@ -39867,9 +39897,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -40021,7 +40052,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &7118174904589624893
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40087,9 +40118,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -40850,7 +40882,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &7118174904947323257
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40916,9 +40948,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -41206,9 +41239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -41238,7 +41272,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!4 &7118174905018962002
 Transform:
   m_ObjectHideFlags: 0
@@ -41406,7 +41440,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &7118174905106877721
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41472,9 +41506,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -42014,7 +42049,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!4 &7118174905255592680
 Transform:
   m_ObjectHideFlags: 0
@@ -42080,9 +42115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -42623,7 +42659,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!54 &7118174905503660508
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42689,9 +42725,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -43138,9 +43175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021f9004f348d74abb4f0ae3ed02375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  downForce: 100
   maxAngle: 60
-  steeringSpeed: 10
-  steeringSpeedThresh: 1.5
+  steeringLerp: 5
+  steeringSpeedMax: 8
   maxTorque: 200
   brakeTorque: 100000
   unitType: 0
@@ -43170,7 +43208,7 @@ MonoBehaviour:
   raysNumber: 8
   emergencyBrakeThresh: 1.5
   slowDownThresh: 4
-  hasToStop: 0
+  vehicleStatus: 0
 --- !u!33 &7118174905736899397
 MeshFilter:
   m_ObjectHideFlags: 0
