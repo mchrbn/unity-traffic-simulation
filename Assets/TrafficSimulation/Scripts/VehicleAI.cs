@@ -10,6 +10,8 @@ namespace TrafficSimulation {
     /*
         [-] Check prefab #6 issue
         [-] Deaccelerate when see stop in front
+        [-] Smooth sharp turns when two segments are linked
+        
     */
 
     public struct Target{
