@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/TrafficSimulation/Examples/Scenes/01_Example.unity
+    path: Assets/TrafficSimulation/Examples/Scenes/01_Main.unity
     guid: 025f082e42b5b744db4811d08781ee3c
   m_configObjects: {}

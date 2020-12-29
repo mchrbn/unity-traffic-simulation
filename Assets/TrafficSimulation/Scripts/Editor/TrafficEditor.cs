@@ -142,7 +142,7 @@ namespace TrafficSimulation {
             Undo.RecordObject(wps, "Traffic Inspector Edit");
 
             //Draw the Inspector
-            TrafficEditorInspector.DrawInspector(wps, out bool restructureSystem);
+            TrafficEditorInspector.DrawInspector(wps, serializedObject, out bool restructureSystem);
 
             //Rename waypoints if some have been deleted
             if (restructureSystem) {

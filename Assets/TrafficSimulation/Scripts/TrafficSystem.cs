@@ -15,6 +15,7 @@ namespace TrafficSimulation {
         public float arrowSizeWaypoint = 1;
         public float arrowSizeIntersection = 0.5f;
         public float waypointSize = 0.5f;
+        public string[] collisionLayers;
         
         public List<Segment> segments = new List<Segment>();
         public List<Intersection> intersections = new List<Intersection>();

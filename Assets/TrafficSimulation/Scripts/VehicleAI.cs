@@ -36,6 +36,7 @@ namespace TrafficSimulation {
 
 
         [Header("Radar")]
+
         [Tooltip("Empty gameobject from where the rays will be casted")]
         public Transform raycastAnchor;
 
@@ -54,7 +55,6 @@ namespace TrafficSimulation {
         [Tooltip("If detected vehicle is below this distance (and above, above distance), ego vehicle will slow down")]
         public float slowDownThresh = 4f;
 
-        //[HideInInspector] public bool hasToStop =  false;
         [HideInInspector] public Status vehicleStatus = Status.GO;
 
         private WheelDrive wheelDrive;
@@ -141,48 +141,74 @@ namespace TrafficSimulation {
                     wheelDrive.maxSpeed = Mathf.Min(wheelDrive.maxSpeed, wheelDrive.steeringSpeedMax);
                 }
 
-                //2. Check if there are vehicles which are detected by the radar
+                //2. Check if there are obstacles which are detected by the radar
                 float hitDist;
-                VehicleAI otherVehicle = GetDetectedVehicle(out hitDist);
+                GameObject obstacle = GetDetectedObstacles(out hitDist);
 
-                if(otherVehicle != null){
-                    //Check if it's front vehicle
-                    float dotFront = Vector3.Dot(this.transform.forward, otherVehicle.transform.forward);
+                //Check if we hit something
+                if(obstacle != null){
 
-                    //If detected front vehicle max speed is lower than ego vehicle, then decrease ego vehicle max speed
-                    if(otherVehicle.wheelDrive.maxSpeed < wheelDrive.maxSpeed && dotFront > .8f){
-                        float ms = Mathf.Max(wheelDrive.GetSpeedMS(otherVehicle.wheelDrive.maxSpeed) - .5f, .1f);
-                        wheelDrive.maxSpeed = wheelDrive.GetSpeedUnit(ms);
+                    WheelDrive otherVehicle = null;
+                    otherVehicle = obstacle.GetComponent<WheelDrive>();
+
+                    ///////////////////////////////////////////////////////////////
+                    //Differenciate between other vehicles AI and generic obstacles (including controlled vehicle, if any)
+                    if(otherVehicle != null){
+                        //Check if it's front vehicle
+                        float dotFront = Vector3.Dot(this.transform.forward, otherVehicle.transform.forward);
+
+                        //If detected front vehicle max speed is lower than ego vehicle, then decrease ego vehicle max speed
+                        if(otherVehicle.maxSpeed < wheelDrive.maxSpeed && dotFront > .8f){
+                            float ms = Mathf.Max(wheelDrive.GetSpeedMS(otherVehicle.maxSpeed) - .5f, .1f);
+                            wheelDrive.maxSpeed = wheelDrive.GetSpeedUnit(ms);
+                        }
+                        
+                        //If the two vehicles are too close, and facing the same direction, brake the ego vehicle
+                        if(hitDist < emergencyBrakeThresh && dotFront > .8f){
+                            acc = 0;
+                            brake = 1;
+                            wheelDrive.maxSpeed = Mathf.Max(wheelDrive.maxSpeed / 2f, wheelDrive.minSpeed);
+                        }
+
+                        //If the two vehicles are too close, and not facing same direction, slight make the ego vehicle go backward
+                        else if(hitDist < emergencyBrakeThresh && dotFront <= .8f){
+                            acc = -.3f;
+                            brake = 0f;
+                            wheelDrive.maxSpeed = Mathf.Max(wheelDrive.maxSpeed / 2f, wheelDrive.minSpeed);
+
+                            //Check if the vehicle we are close to is located on the right or left then apply according steering to try to make it move
+                            float dotRight = Vector3.Dot(this.transform.forward, otherVehicle.transform.right);
+                            //Right
+                            if(dotRight > 0.1f) steering = -.3f;
+                            //Left
+                            else if(dotRight < -0.1f) steering = .3f;
+                            //Middle
+                            else steering = -.7f;
+                        }
+
+                        //If the two vehicles are getting close, slow down their speed
+                        else if(hitDist < slowDownThresh){
+                            acc = .5f;
+                            brake = 0f;
+                            //wheelDrive.maxSpeed = Mathf.Max(wheelDrive.maxSpeed / 1.5f, wheelDrive.minSpeed);
+                        }
                     }
-                    
-                    //If the two vehicles are too close, and facing the same direction, brake the ego vehicle
-                    if(hitDist < emergencyBrakeThresh && dotFront > .8f){
-                        acc = 0;
-                        brake = 1;
-                        wheelDrive.maxSpeed = Mathf.Max(wheelDrive.maxSpeed / 2f, wheelDrive.minSpeed);
-                    }
 
-                    //If the two vehicles are too close, and not facing same direction, slight make the ego vehicle go backward
-                    else if(hitDist < emergencyBrakeThresh && dotFront <= .8f){
-                        acc = -.3f;
-                        brake = 0f;
-                        wheelDrive.maxSpeed = Mathf.Max(wheelDrive.maxSpeed / 2f, wheelDrive.minSpeed);
+                    ///////////////////////////////////////////////////////////////////
+                    // Generic obstacles
+                    else{
+                        //Emergency brake if getting too close
+                        if(hitDist < emergencyBrakeThresh){
+                            acc = 0;
+                            brake = 1;
+                            wheelDrive.maxSpeed = Mathf.Max(wheelDrive.maxSpeed / 2f, wheelDrive.minSpeed);
+                        }
 
-                        //Check if the vehicle we are close to is located on the right or left then apply according steering to try to make it move
-                        float dotRight = Vector3.Dot(this.transform.forward, otherVehicle.transform.right);
-                        //Right
-                        if(dotRight > 0.1f) steering = -.3f;
-                        //Left
-                        else if(dotRight < -0.1f) steering = .3f;
-                        //Middle
-                        else steering = -.7f;
-                    }
-
-                    //If the two vehicles are getting close, slow down their speed
-                    else if(hitDist < slowDownThresh){
-                        acc = .5f;
-                        brake = 0f;
-                        wheelDrive.maxSpeed = Mathf.Max(wheelDrive.maxSpeed / 2f, wheelDrive.minSpeed);
+                        //Otherwise if getting relatively close decrease speed
+                         else if(hitDist < slowDownThresh){
+                            acc = .5f;
+                            brake = 0f;
+                        }
                     }
                 }
 
@@ -199,33 +225,31 @@ namespace TrafficSimulation {
         }
 
 
-        VehicleAI GetDetectedVehicle(out float _hitDist){
-            VehicleAI detectedVehicle = null;
+        GameObject GetDetectedObstacles(out float _hitDist){
+            GameObject detectedObstacle = null;
             float minDist = 1000f;
 
             float initRay = (raysNumber / 2f) * raySpacing;
-            float hitDist =  0f;
+            float hitDist =  -1f;
             for(float a=-initRay; a<=initRay; a+=raySpacing){
-                VehicleAI frontVehicleAI = null;
-                CastRay(raycastAnchor.transform.position, a, this.transform.forward, raycastLength, out frontVehicleAI, out hitDist);
+                CastRay(raycastAnchor.transform.position, a, this.transform.forward, raycastLength, out detectedObstacle, out hitDist);
 
-                if(frontVehicleAI == null) continue;
+                if(detectedObstacle == null) continue;
 
-                float dist = Vector3.Distance(this.transform.position, frontVehicleAI.transform.position);
-                if(frontVehicleAI != null && dist < minDist) {
-                    detectedVehicle = frontVehicleAI;
+                float dist = Vector3.Distance(this.transform.position, detectedObstacle.transform.position);
+                if(dist < minDist) {
                     minDist = dist;
                     break;
                 }
             }
 
             _hitDist = hitDist;
-            return detectedVehicle;
+            return detectedObstacle;
         }
 
         
-        void CastRay(Vector3 _anchor, float _angle, Vector3 _dir, float _length, out VehicleAI _outVehicleAI, out float _outHitDistance){
-            _outVehicleAI = null;
+        void CastRay(Vector3 _anchor, float _angle, Vector3 _dir, float _length, out GameObject _outObstacle, out float _outHitDistance){
+            _outObstacle = null;
             _outHitDistance = -1f;
 
             //Draw raycast
@@ -233,9 +257,16 @@ namespace TrafficSimulation {
 
             //Detect hit only on the autonomous vehicle layer
             int layer = 1 << LayerMask.NameToLayer("AutonomousVehicle");
+            int finalMask = layer;
+
+            foreach(string layerName in trafficSystem.collisionLayers){
+                int id = 1 << LayerMask.NameToLayer(layerName);
+                finalMask = finalMask | id;
+            }
+
             RaycastHit hit;
-            if(Physics.Raycast(_anchor, Quaternion.Euler(0, _angle, 0) * _dir, out hit, _length, layer)){
-                _outVehicleAI = hit.collider.GetComponentInParent<VehicleAI>();
+            if(Physics.Raycast(_anchor, Quaternion.Euler(0, _angle, 0) * _dir, out hit, _length, finalMask)){
+                _outObstacle = hit.collider.gameObject;
                 _outHitDistance = hit.distance;
             }
         }

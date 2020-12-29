@@ -8,7 +8,7 @@ using UnityEngine;
 namespace TrafficSimulation {
     public static class TrafficEditorInspector {
         //Whole Inspector layout
-        public static void DrawInspector(TrafficSystem trafficSystem, out bool restructureSystem) {
+        public static void DrawInspector(TrafficSystem trafficSystem, SerializedObject serializedObject, out bool restructureSystem) {
             //-- Gizmo settings
             Header("Gizmo Config");
             Toggle("Hide Gizmos", ref trafficSystem.hideGuizmos);
@@ -21,6 +21,9 @@ namespace TrafficSimulation {
             //-- System config
             Header("System Config");
             FloatField("Segment Detection Threshold", ref trafficSystem.segDetectThresh);
+
+            PropertyField("Collision Layers", "collisionLayers", serializedObject);
+            
             EditorGUILayout.Space();
 
             //Helper
@@ -54,6 +57,11 @@ namespace TrafficSimulation {
         
         private static void FloatField(string label, ref float value) {
             value = EditorGUILayout.FloatField(label, value);
+        }
+
+        private static void PropertyField(string label, string value, SerializedObject serializedObject){
+            SerializedProperty extra = serializedObject.FindProperty(value);
+            EditorGUILayout.PropertyField(extra, new GUIContent(label), true);
         }
 
         private static void HelpBox(string content) {
